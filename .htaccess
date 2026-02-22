@@ -1,0 +1,33 @@
+# Force correct MIME types
+<Files ~ "\.(js)$">
+  Header set Content-Type "application/javascript"
+</Files>
+
+<Files ~ "\.(css)$">
+  Header set Content-Type "text/css"
+</Files>
+
+# Alternative MIME type configuration
+AddType application/javascript .js
+AddType text/css .css
+AddType application/json .json
+
+# Temporarily disable CSP to fix loading issues
+# <IfModule mod_headers.c>
+#   Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;"
+# </IfModule>
+
+# Enable rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Handle client-side routing
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Basic security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options nosniff
+</IfModule>
