@@ -39,7 +39,7 @@ export default async function handler(request: Request) {
                 'Authorization': `Bearer ${resendApiKey}`,
             },
             body: JSON.stringify({
-                from: 'Cash Advance Network <support@cashadvancenetwork.com>',
+                from: 'Cash Advance Network <onboarding@resend.dev>',
                 to: [email],
                 subject: 'Complete Your Loan Application',
                 html: `
