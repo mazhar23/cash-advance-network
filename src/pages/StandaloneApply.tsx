@@ -185,14 +185,16 @@ const StandaloneApply = () => {
           console.error('❌ Admin email failed:', err);
         }
 
-        // Send confirmation to the person who filled the form
-        console.log('Sending client confirmation email to:', data.email);
+        // Send confirmation to the client's registered email (if they are a registered client)
+        // or fallback to the email they provided in the form
+        const recipientEmail = client ? client.email : data.email;
+        console.log('Sending client confirmation email to:', recipientEmail);
         const clientRes = await fetch('/api/send-application-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             applicationData: data,
-            clientEmail: data.email,
+            clientEmail: recipientEmail,
             recipientType: 'client'
           }),
         });
