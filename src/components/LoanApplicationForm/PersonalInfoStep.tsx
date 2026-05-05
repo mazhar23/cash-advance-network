@@ -157,4 +157,3 @@ const PersonalInfoStep = ({ data, onNext }: PersonalInfoStepProps) => {
 };
 
 export default PersonalInfoStep;
-

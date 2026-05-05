@@ -5,10 +5,12 @@ const AdminClients = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [expiryDays, setExpiryDays] = useState("30");
+  const [pageType, setPageType] = useState("lendingclub-apply");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [clients, setClients] = useState<any[]>([]);
   const [isLoadingClients, setIsLoadingClients] = useState(true);
+  const [deactivatingId, setDeactivatingId] = useState<string | null>(null);
 
   // Fetch all clients when component mounts
   useEffect(() => {
@@ -36,6 +38,34 @@ const AdminClients = () => {
       console.error('❌ Exception fetching clients:', err);
     } finally {
       setIsLoadingClients(false);
+    }
+  };
+
+  const handleDeactivate = async (clientId: string) => {
+    if (!window.confirm("Are you sure you want to deactivate this client's token link?")) return;
+
+    setDeactivatingId(clientId);
+    try {
+      const { error } = await supabase
+        .from('clients')
+        .update({ is_active: false })
+        .eq('id', clientId);
+
+      if (error) {
+        throw error;
+      }
+
+      console.log(`✅ Client ${clientId} deactivated successfully`);
+      // Update local state without re-fetching all
+      setClients(clients.map(c => 
+        c.id === clientId ? { ...c, is_active: false } : c
+      ));
+      alert("Client deactivated successfully!");
+    } catch (err: any) {
+      console.error('❌ Error deactivating client:', err);
+      alert(`Failed to deactivate client: ${err.message}`);
+    } finally {
+      setDeactivatingId(null);
     }
   };
 
@@ -83,7 +113,7 @@ const AdminClients = () => {
 
       console.log('✅ Client created successfully:', data);
 
-      const accessUrl = `${window.location.origin}/standalone-apply?token=${token}`;
+      const accessUrl = `${window.location.origin}/${pageType}?token=${token}`;
 
       // Send email via API
       let emailStatus = '📧 Sending email...';
@@ -216,6 +246,21 @@ const AdminClients = () => {
           </div>
 
           <div>
+            <label htmlFor="pageType" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151' }}>
+              Landing Page
+            </label>
+            <select
+              id="pageType"
+              value={pageType}
+              onChange={(e) => setPageType(e.target.value)}
+              style={{ width: '100%', padding: '0.75rem', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '1rem', backgroundColor: 'white', outline: 'none', cursor: 'pointer' }}
+            >
+              <option value="lendingclub-apply">🏦 LendingClub Style Page</option>
+              <option value="standalone-apply">📋 Standard Apply Page</option>
+            </select>
+          </div>
+
+          <div>
             <label htmlFor="expiryDays" style={{
               display: 'block',
               marginBottom: '0.5rem',
@@ -333,9 +378,36 @@ const AdminClients = () => {
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                     <span style={{ fontWeight: '600' }}>{client.name}</span>
-                    <span style={{ fontSize: '0.875rem', color: client.is_active ? 'green' : 'red' }}>
-                      {client.is_active ? 'Active' : 'Inactive'}
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <span style={{ fontSize: '0.875rem', color: client.is_active ? 'green' : 'red', fontWeight: '500' }}>
+                        {client.is_active ? 'Active' : 'Inactive'}
+                      </span>
+                      {client.is_active && (
+                        <button
+                          onClick={() => handleDeactivate(client.id)}
+                          disabled={deactivatingId === client.id}
+                          style={{
+                            padding: '0.25rem 0.75rem',
+                            fontSize: '0.75rem',
+                            backgroundColor: deactivatingId === client.id ? '#fca5a5' : '#ef4444',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: deactivatingId === client.id ? 'not-allowed' : 'pointer',
+                            fontWeight: '600',
+                            transition: 'background-color 0.2s',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (deactivatingId !== client.id) e.currentTarget.style.backgroundColor = '#dc2626';
+                          }}
+                          onMouseLeave={(e) => {
+                            if (deactivatingId !== client.id) e.currentTarget.style.backgroundColor = '#ef4444';
+                          }}
+                        >
+                          {deactivatingId === client.id ? 'Deactivating...' : 'Deactivate'}
+                        </button>
+                      )}
+                    </div>
                   </div>
                   <div style={{ fontSize: '0.875rem', color: '#4b5563' }}>{client.email}</div>
                   <div style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.25rem' }}>

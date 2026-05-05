@@ -33,7 +33,7 @@ const Disclosures = () => {
                   <div>
                     <h2 className="text-lg font-bold text-foreground mb-2">Important Notice</h2>
                     <p className="text-muted-foreground">
-                      Cash Advance Network Online is NOT a lender. We operate as a free matching service that connects 
+                      Cash Advance America Online is NOT a lender. We operate as a free matching service that connects 
                       consumers with lenders and financial service providers. Submitting a request does not 
                       guarantee approval for a loan.
                     </p>
@@ -43,7 +43,7 @@ const Disclosures = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Loan Matching Service Disclosure</h2>
                   <p className="text-muted-foreground mb-4">
-                    Cash Advance Network Online provides a free service that attempts to connect consumers with lenders 
+                    Cash Advance America Online provides a free service that attempts to connect consumers with lenders 
                     and financial service providers who may provide short-term loans or other financial products. 
                     We do not make credit decisions, do not originate, fund, or service loans, and do not 
                     determine loan terms or approve applications.
@@ -155,7 +155,7 @@ const Disclosures = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
                   <p className="text-muted-foreground">
                     For questions about these disclosures or our services:<br />
-                    Email: disclosures@cashadvancenetwork.com
+                    Email: disclosures@cashadvanceamerica.online
                   </p>
                 </section>
               </div>

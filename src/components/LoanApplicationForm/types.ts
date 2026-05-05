@@ -60,4 +60,3 @@ export type EmploymentData = z.infer<typeof employmentSchema>;
 export type LoanDetailsData = z.infer<typeof loanDetailsSchema>;
 export type DocumentsData = z.infer<typeof documentsSchema>;
 export type FullApplicationData = z.infer<typeof fullApplicationSchema>;
-

@@ -78,7 +78,7 @@ const BadCreditLoans = () => {
                 lenders look at the bigger picture—including your income, employment, and ability to repay.
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                At Cash Advance Network Online, we connect you with lenders who understand that life happens. 
+                At Cash Advance America Online, we connect you with lenders who understand that life happens. 
                 Medical emergencies, job loss, divorce, or other circumstances can impact your credit, 
                 but they shouldn't prevent you from accessing the funds you need.
               </p>

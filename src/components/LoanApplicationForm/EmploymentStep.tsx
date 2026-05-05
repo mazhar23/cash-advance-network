@@ -114,4 +114,3 @@ const EmploymentStep = ({ data, onNext, onBack }: EmploymentStepProps) => {
 };
 
 export default EmploymentStep;
-

@@ -8,7 +8,7 @@ import {
 const faqs = [
   {
     question: "What is a payday loan and how does it work?",
-    answer: "A payday loan is a short-term, small-dollar loan typically due on your next payday. You borrow a set amount (usually $100-$1,500), and repay it plus fees when you receive your next paycheck. These loans are designed for emergency expenses and short-term financial gaps. At Cash Advance Network Online, we connect you with lenders offering competitive rates and flexible terms.",
+    answer: "A payday loan is a short-term, small-dollar loan typically due on your next payday. You borrow a set amount (usually $100-$1,500), and repay it plus fees when you receive your next paycheck. These loans are designed for emergency expenses and short-term financial gaps. At Cash Advance America Online, we connect you with lenders offering competitive rates and flexible terms.",
   },
   {
     question: "Can I get a loan with bad credit or no credit?",

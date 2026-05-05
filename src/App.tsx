@@ -25,6 +25,7 @@ import Apply from "./pages/Apply";
 import AboutUs from "./pages/AboutUs";
 import StandaloneApply from "./pages/StandaloneApply";
 import AdminClients from "./pages/AdminClients";
+import LendingClubApply from "./pages/LendingClubApply";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/standalone-apply" element={<StandaloneApply />} />
           <Route path="/admin-clients" element={<AdminClients />} />
+          <Route path="/lendingclub-apply" element={<LendingClubApply />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

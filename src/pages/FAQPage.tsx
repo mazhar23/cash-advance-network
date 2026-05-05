@@ -15,16 +15,16 @@ const FAQPage = () => {
       title: "General Questions",
       faqs: [
         {
-          question: "What is Cash Advance Network Online?",
-          answer: "Cash Advance Network Online is a free online service that connects consumers with a network of trusted lenders offering payday loans, personal loans, installment loans, and debt consolidation options. We are not a lender ourselves, but a matching service that helps you find the right loan for your needs."
+          question: "What is Cash Advance America Online?",
+          answer: "Cash Advance America Online is a free online service that connects consumers with a network of trusted lenders offering payday loans, personal loans, installment loans, and debt consolidation options. We are not a lender ourselves, but a matching service that helps you find the right loan for your needs."
         },
         {
-          question: "Is Cash Advance Network Online a direct lender?",
-          answer: "No, Cash Advance Network Online is not a direct lender. We operate as a loan matching service that partners with a network of state-licensed lenders. When you apply, we match you with lenders who are most likely to approve your application based on your information."
+          question: "Is Cash Advance America Online a direct lender?",
+          answer: "No, Cash Advance America Online is not a direct lender. We operate as a loan matching service that partners with a network of state-licensed lenders. When you apply, we match you with lenders who are most likely to approve your application based on your information."
         },
         {
-          question: "Is there a fee to use Cash Advance Network Online?",
-          answer: "No, our matching service is completely free to use. You are never charged any fees by Cash Advance Network Online. Any fees associated with your loan will come from the lender you're matched with and will be clearly disclosed before you accept any loan offer."
+          question: "Is there a fee to use Cash Advance America Online?",
+          answer: "No, our matching service is completely free to use. You are never charged any fees by Cash Advance America Online. Any fees associated with your loan will come from the lender you're matched with and will be clearly disclosed before you accept any loan offer."
         }
       ]
     },

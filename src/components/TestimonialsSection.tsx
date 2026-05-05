@@ -6,14 +6,14 @@ const testimonials = [
     name: "Sarah M.",
     location: "Dallas, TX",
     rating: 5,
-    text: "I was skeptical at first, but Cash Advance Network Online really came through for me. I got approved in under 10 minutes and had the money in my account the next morning. The process was incredibly easy!",
+    text: "I was skeptical at first, but Cash Advance America Online really came through for me. I got approved in under 10 minutes and had the money in my account the next morning. The process was incredibly easy!",
     loanType: "Payday Loan",
   },
   {
     name: "Michael R.",
     location: "Phoenix, AZ",
     rating: 5,
-    text: "After being turned down by my bank, I found Cash Advance Network Online. They matched me with a lender who approved me despite my credit score. The customer service was excellent throughout.",
+    text: "After being turned down by my bank, I found Cash Advance America Online. They matched me with a lender who approved me despite my credit score. The customer service was excellent throughout.",
     loanType: "Personal Loan",
   },
   {
@@ -36,7 +36,7 @@ const TestimonialsSection = () => {
             What Our Customers Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied customers who have found financial relief through Cash Advance Network Online.
+            Join thousands of satisfied customers who have found financial relief through Cash Advance America Online.
           </p>
         </div>
 

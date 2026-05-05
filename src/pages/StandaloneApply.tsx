@@ -163,47 +163,49 @@ const StandaloneApply = () => {
 
       console.log('Application saved to database successfully');
 
-      // Send emails via Gmail SMTP API
+      // Send emails
+      const adminEmail = 'ws694481@gmail.com';
+
       try {
-        // Send full details to admin
-        console.log('Sending admin notification email...');
-        const adminRes = await fetch('/api/send-application-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+        // Always send to admin (you) - this should work with Resend free plan
+        console.log('Sending admin email to:', adminEmail);
+
+        const { data: adminEmailData, error: adminEmailError } = await supabase.functions.invoke('send-application-email', {
+          body: {
             applicationData: data,
-            clientEmail: null,
+            clientEmail: adminEmail,
             recipientType: 'admin',
             clientName: client?.name || 'General Application'
-          }),
+          }
         });
-        if (adminRes.ok) {
-          console.log('✅ Admin email sent');
-          emailStatus.admin = true;
+
+        if (adminEmailError) {
+          console.error('❌ Admin email failed:', adminEmailError);
         } else {
-          const err = await adminRes.json();
-          console.error('❌ Admin email failed:', err);
+          console.log('✅ Admin email sent:', adminEmailData);
+          emailStatus.admin = true;
         }
 
-        // Send confirmation to the client's registered email (if they are a registered client)
-        // or fallback to the email they provided in the form
-        const recipientEmail = client ? client.email : data.email;
-        console.log('Sending client confirmation email to:', recipientEmail);
-        const clientRes = await fetch('/api/send-application-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            applicationData: data,
-            clientEmail: recipientEmail,
-            recipientType: 'client'
-          }),
-        });
-        if (clientRes.ok) {
-          console.log('✅ Client confirmation email sent');
-          emailStatus.client = true;
+        // Send to client if they exist (now that domain is verified)
+        if (client) {
+          console.log('Sending client email to:', client.email);
+
+          const { data: clientEmailData, error: clientEmailError } = await supabase.functions.invoke('send-application-email', {
+            body: {
+              applicationData: data,
+              clientEmail: client.email,
+              recipientType: 'client'
+            }
+          });
+
+          if (clientEmailError) {
+            console.error('❌ Client email failed:', clientEmailError);
+          } else {
+            console.log('✅ Client email sent:', clientEmailData);
+            emailStatus.client = true;
+          }
         } else {
-          const err = await clientRes.json();
-          console.error('❌ Client email failed:', err);
+          console.log('No client - skipping client email');
         }
       } catch (emailErr) {
         console.error('❌ Email sending error:', emailErr);
@@ -491,7 +493,7 @@ const StandaloneApply = () => {
                     </div>
                   </div>
                   <CardTitle className="text-center text-2xl font-bold">
-                    Cash Advance Network
+                    Cash Advance America
                   </CardTitle>
                   <p className="text-center text-sm text-muted-foreground mt-1">
                     Complete the form below to apply
@@ -715,4 +717,3 @@ const StandaloneApply = () => {
 };
 
 export default StandaloneApply;
-

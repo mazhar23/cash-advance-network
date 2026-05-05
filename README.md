@@ -1,6 +1,6 @@
-# Cash Advance Network
+# USA Loan Hub
 
-A comprehensive web application for Cash Advance Network, providing fast and easy access to various loan services including payday loans, personal loans, debt consolidation, and more.
+A comprehensive web application for USA Loan Hub, providing fast and easy access to various loan services including payday loans, personal loans, debt consolidation, and more.
 
 ## Features
 

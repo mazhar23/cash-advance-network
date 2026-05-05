@@ -154,4 +154,3 @@ const LoanDetailsStep = ({ data, onNext, onBack }: LoanDetailsStepProps) => {
 };
 
 export default LoanDetailsStep;
-

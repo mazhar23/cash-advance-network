@@ -10,7 +10,7 @@ const AboutUs = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Cash Advance Network Online</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Cash Advance America Online</h1>
           <p className="text-xl max-w-3xl mx-auto opacity-90">
             Your trusted independent loan matching service, connecting you with the right financial solutions.
           </p>
@@ -26,7 +26,7 @@ const AboutUs = () => {
               <h2 className="text-2xl font-bold text-foreground">Our Independence</h2>
             </div>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              <strong className="text-foreground">Cash Advance Network (cashadvancenetwork.com)</strong> is an independent 
+              <strong className="text-foreground">Cash Advance America (cashadvanceamerica.online)</strong> is an independent 
               loan matching service operating under our own brand. We want to be completely transparent with our customers:
             </p>
             <ul className="space-y-3 text-muted-foreground">
@@ -170,4 +170,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-

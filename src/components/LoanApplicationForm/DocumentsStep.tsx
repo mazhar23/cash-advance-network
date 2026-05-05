@@ -201,4 +201,3 @@ const DocumentsStep = ({ data, onSubmit, onBack, isSubmitting }: DocumentsStepPr
 };
 
 export default DocumentsStep;
-

@@ -42,7 +42,7 @@ const LendingLicenses = () => {
                 <CardContent className="p-8">
                   <h2 className="text-2xl font-bold text-foreground mb-4">Our Commitment to Compliance</h2>
                   <p className="text-muted-foreground mb-4">
-                    Cash Advance Network Online is committed to connecting consumers only with licensed, compliant 
+                    Cash Advance America Online is committed to connecting consumers only with licensed, compliant 
                     lenders. All lenders in our network are required to maintain appropriate state licenses 
                     and comply with all applicable federal and state lending laws.
                   </p>
@@ -151,7 +151,7 @@ const LendingLicenses = () => {
                     <li>• Federal Trade Commission (FTC): ftc.gov</li>
                   </ul>
                   <p className="text-muted-foreground mt-4">
-                    Contact us: compliance@cashadvancenetwork.com
+                    Contact us: compliance@cashadvanceamerica.online
                   </p>
                 </CardContent>
               </Card>

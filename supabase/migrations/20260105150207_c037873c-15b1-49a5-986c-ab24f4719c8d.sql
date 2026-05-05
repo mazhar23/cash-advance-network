@@ -1,7 +1,6 @@
--- Create storage bucket for loan documents (skip if already exists)
+-- Create storage bucket for loan documents
 INSERT INTO storage.buckets (id, name, public)
-VALUES ('loan-documents', 'loan-documents', false)
-ON CONFLICT (id) DO NOTHING;
+VALUES ('loan-documents', 'loan-documents', false);
 
 -- Create policy for uploading documents (anyone can upload)
 CREATE POLICY "Anyone can upload loan documents"

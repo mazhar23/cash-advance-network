@@ -67,7 +67,7 @@ const HowItWorksPage = () => {
                 How It Works
               </h1>
               <p className="text-lg md:text-xl text-primary-foreground/80 mb-8">
-                Getting a loan through Cash Advance Network Online is simple, fast, and secure. 
+                Getting a loan through Cash Advance America Online is simple, fast, and secure. 
                 Follow these four easy steps to get the funds you need.
               </p>
             </div>
@@ -110,7 +110,7 @@ const HowItWorksPage = () => {
         <section className="py-16 md:py-24 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Why Trust Cash Advance Network Online?</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Why Trust Cash Advance America Online?</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">

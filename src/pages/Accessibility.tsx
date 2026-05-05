@@ -36,7 +36,7 @@ const Accessibility = () => {
                     <div>
                       <h2 className="text-2xl font-bold text-foreground mb-4">Our Commitment</h2>
                       <p className="text-muted-foreground">
-                        Cash Advance Network Online is committed to ensuring digital accessibility for people with 
+                        Cash Advance America Online is committed to ensuring digital accessibility for people with 
                         disabilities. We are continually improving the user experience for everyone and 
                         applying the relevant accessibility standards to ensure we provide equal access to
                         all users.
@@ -167,7 +167,7 @@ const Accessibility = () => {
                     to access our services:
                   </p>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• <strong>Email:</strong> Send your inquiry to accessibility@cashadvancenetwork.com</li>
+                    <li>• <strong>Email:</strong> Send your inquiry to accessibility@cashadvanceamerica.online</li>
                     <li>• <strong>TTY:</strong> TTY users can reach us through your state's relay service</li>
                   </ul>
                 </CardContent>
@@ -182,7 +182,7 @@ const Accessibility = () => {
                   </p>
                   <div className="bg-muted/50 rounded-lg p-4">
                     <p className="text-muted-foreground">
-                      <strong>Email:</strong> accessibility@cashadvancenetwork.com<br />
+                      <strong>Email:</strong> accessibility@cashadvanceamerica.online<br />
                       <strong>Response Time:</strong> We aim to respond within 2 business days
                     </p>
                   </div>

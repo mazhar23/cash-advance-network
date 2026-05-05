@@ -69,4 +69,3 @@ const SuccessStep = ({ applicationId }: SuccessStepProps) => {
 };
 
 export default SuccessStep;
-

@@ -68,4 +68,3 @@ const ProgressIndicator = ({ currentStep, totalSteps, steps }: ProgressIndicator
 };
 
 export default ProgressIndicator;
-

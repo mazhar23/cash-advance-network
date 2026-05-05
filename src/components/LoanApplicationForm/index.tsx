@@ -187,4 +187,3 @@ const LoanApplicationForm = () => {
 };
 
 export default LoanApplicationForm;
-

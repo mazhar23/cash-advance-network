@@ -92,11 +92,11 @@ const EmergencyLoans = () => {
                 emergency loans provide fast access to cash without the lengthy approval process of traditional loans.
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                At Cash Advance Network, we understand that emergencies don't wait. That's why our application 
+                At Cash Advance America, we understand that emergencies don't wait. That's why our application 
                 process takes just minutes, and many of our customers receive funds as soon as the next business day.
               </p>
 
-              <h3 className="text-2xl font-bold text-foreground mb-6">Why Choose Emergency Loans from Cash Advance Network?</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Why Choose Emergency Loans from Cash Advance America?</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {[
                   "Apply 24/7 from anywhere",

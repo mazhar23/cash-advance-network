@@ -40,7 +40,7 @@ const BenefitsSection = () => {
               America's Trusted Source for <span className="text-primary">Fast Cash Loans</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Since 2010, Cash Advance Network Online has helped over 500,000 Americans access the emergency funds they need. 
+              Since 2010, Cash Advance America Online has helped over 500,000 Americans access the emergency funds they need. 
               We're committed to responsible lending, transparent pricing, and exceptional customer service.
             </p>
 

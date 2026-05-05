@@ -1,12 +1,6 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
 
-export const config = {
-    runtime: 'nodejs',
-};
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-    // CORS headers
+export default async function handler(req: any, res: any) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -23,22 +17,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const { email, name, accessUrl } = req.body;
 
         const gmailUser = process.env.GMAIL_USER;
-        const gmailPass = process.env.GMAIL_APP_PASSWORD;
+        const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
 
-        if (!gmailUser || !gmailPass) {
-            return res.status(500).json({ error: 'Email credentials are missing' });
+        if (!gmailUser || !gmailAppPassword) {
+            return res.status(500).json({ error: 'Gmail credentials are missing' });
         }
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: gmailUser,
-                pass: gmailPass,
+                pass: gmailAppPassword,
             },
         });
 
         await transporter.sendMail({
-            from: `"Cash Advance Network" <${gmailUser}>`,
+            from: `"Cash Advance America" <${gmailUser}>`,
             to: email,
             subject: 'Complete Your Loan Application',
             html: `
@@ -61,7 +57,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(200).json({ success: true });
 
     } catch (err: any) {
-        console.error('Error sending email:', err);
+        console.error('Error sending email:', err.message);
         return res.status(500).json({ error: err.message });
     }
 }

@@ -28,9 +28,9 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Introduction</h2>
                   <p className="text-muted-foreground">
-                    Cash Advance Network Online ("we," "our," or "us") is committed to protecting your privacy. 
+                    Cash Advance America Online ("we," "our," or "us") is committed to protecting your privacy. 
                     This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
-                    when you visit our website cashadvancenetwork.com and use our loan matching services.
+                    when you visit our website cashadvanceamerica.online and use our loan matching services.
                   </p>
                 </section>
 
@@ -135,7 +135,7 @@ const PrivacyPolicy = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-4">Contact Us</h2>
                   <p className="text-muted-foreground">
                     If you have questions about this Privacy Policy, please contact us at:<br />
-                    Email: privacy@cashadvancenetwork.com
+                    Email: privacy@cashadvanceamerica.online
                   </p>
                 </section>
               </div>

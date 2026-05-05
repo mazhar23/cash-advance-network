@@ -28,7 +28,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Acceptance of Terms</h2>
                   <p className="text-muted-foreground">
-                    By accessing or using Cash Advance Network Online's website and services, you agree to be bound 
+                    By accessing or using Cash Advance America Online's website and services, you agree to be bound 
                     by these Terms of Service. If you do not agree to these terms, please do not use our services.
                   </p>
                 </section>
@@ -36,7 +36,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Description of Service</h2>
                   <p className="text-muted-foreground mb-4">
-                    Cash Advance Network Online operates as a loan matching service. We are NOT a lender. Our service 
+                    Cash Advance America Online operates as a loan matching service. We are NOT a lender. Our service 
                     connects consumers seeking personal loans, payday loans, or other financial products with a 
                     network of third-party lenders and financial service providers.
                   </p>
@@ -92,7 +92,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Fees</h2>
                   <p className="text-muted-foreground">
-                    Cash Advance Network Online does not charge any fees to consumers for using our matching service. 
+                    Cash Advance America Online does not charge any fees to consumers for using our matching service. 
                     However, lenders may charge fees in connection with loans they offer. All fees will be 
                     disclosed by the lender before you accept any loan.
                   </p>
@@ -109,7 +109,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Limitation of Liability</h2>
                   <p className="text-muted-foreground">
-                    TO THE MAXIMUM EXTENT PERMITTED BY LAW, Cash Advance Network ONLINE SHALL NOT BE LIABLE FOR ANY 
+                    TO THE MAXIMUM EXTENT PERMITTED BY LAW, CASH ADVANCE AMERICA ONLINE SHALL NOT BE LIABLE FOR ANY 
                     INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE 
                     OF OUR SERVICE.
                   </p>
@@ -118,7 +118,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Indemnification</h2>
                   <p className="text-muted-foreground">
-                    You agree to indemnify and hold harmless Cash Advance Network Online and its affiliates from any 
+                    You agree to indemnify and hold harmless Cash Advance America Online and its affiliates from any 
                     claims, damages, or expenses arising from your use of our service or violation of these terms.
                   </p>
                 </section>
@@ -144,7 +144,7 @@ const TermsOfService = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-4">Contact Us</h2>
                   <p className="text-muted-foreground">
                     For questions about these Terms of Service, contact us at:<br />
-                    Email: legal@cashadvancenetwork.com
+                    Email: legal@cashadvanceamerica.online
                   </p>
                 </section>
               </div>
