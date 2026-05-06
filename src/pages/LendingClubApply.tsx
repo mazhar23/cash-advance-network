@@ -229,6 +229,8 @@ export default function LendingClubApply() {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [selectedCard, setSelectedCard] = useState<string|null>(null);
 
+  useEffect(() => { document.title = "LendingClub Online Loans"; }, []);
+
   useEffect(() => {
     const token = searchParams.get("token");
     if (!token) return;

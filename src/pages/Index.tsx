@@ -16,6 +16,8 @@ const Index = () => {
   const [client, setClient] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => { document.title = "Cash Advance America"; }, []);
+
   useEffect(() => {
     const token = searchParams.get('token');
     if (token) {
