@@ -5,6 +5,10 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/lendingclub-apply",
+      "destination": "/lendingclub-apply.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
