@@ -22,14 +22,9 @@ const formSchema = z.object({
 });
 type FormData = z.infer<typeof formSchema>;
 
-/* ── AA Logo SVG ── */
+/* ── AA Logo ── */
 const AALogo = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="40" height="40" rx="8" fill="#15367B"/>
-    <path d="M20 8L10 28H14L16.5 23H23.5L26 28H30L20 8Z" fill="white"/>
-    <path d="M17.5 20H22.5L20 15L17.5 20Z" fill="#15367B"/>
-    <rect x="25" y="24" width="6" height="4" fill="#00A25C"/>
-  </svg>
+  <img src="/advance-america-logo.jpg" alt="Advance America Lending logo" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
 );
 
 const CSS = `
@@ -37,37 +32,37 @@ const CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Poppins',sans-serif;}
 :root{
-  --aa-navy: #15367B;
-  --aa-navy-dark: #0f2759;
-  --aa-green: #00A25C;
-  --aa-green-h: #00874c;
-  --aa-light-bg: #f4f7f6;
+  --aa-navy: #1f2937;
+  --aa-navy-dark: #111827;
+  --aa-primary: #fbbc04;
+  --aa-primary-h: #dfa300;
+  --aa-black: #000000;
+  --aa-light-bg: #f8f9fa;
   --aa-border: #e2e8f0;
   --aa-text: #1a202c;
-  --aa-muted: #64748b;
+  --aa-muted: #718096;
 }
 /* Nav */
 .aa-nav{background:#fff;border-bottom:1px solid var(--aa-border);position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
 .aa-nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:70px;display:flex;align-items:center;justify-content:space-between;}
 .aa-logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.aa-logo-text{display:flex;flex-direction:column;line-height:1.2;}
-.aa-logo-main{font-size:22px;font-weight:800;color:var(--aa-navy);letter-spacing:-0.5px;text-transform:uppercase;}
-.aa-logo-sub{font-size:11px;font-weight:600;color:var(--aa-green);letter-spacing:1px;text-transform:uppercase;}
 .aa-nav-links{display:flex;align-items:center;gap:24px;}
 .aa-nav-item{position:relative;font-size:14px;font-weight:600;color:var(--aa-navy);text-decoration:none;cursor:pointer;transition:color 0.2s;}
-.aa-nav-item:hover{color:var(--aa-green);}
-.aa-btn-primary{background:var(--aa-green);color:#fff;border:none;padding:10px 24px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
-.aa-btn-primary:hover{background:var(--aa-green-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,162,92,0.2);}
+.aa-nav-item:hover{color:var(--aa-primary-h);}
+.aa-btn-nav{background:var(--aa-black);color:#fff;border:none;padding:10px 28px;border-radius:30px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.aa-btn-nav:hover{background:#333;transform:translateY(-1px);}
+
+.aa-btn-primary{background:var(--aa-primary);color:#111;border:none;padding:14px 32px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.aa-btn-primary:hover{background:var(--aa-primary-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(251,188,4,0.3);}
 
 /* Hero */
-.aa-hero{background:linear-gradient(135deg, var(--aa-navy) 0%, var(--aa-navy-dark) 100%);color:#fff;padding:80px 20px;position:relative;overflow:hidden;}
+.aa-hero{background-image:url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/YD0EMK5bgBTZPx84/advance-america-YbN4pkJxywhZZZ4p.jpeg');background-size:cover;background-position:center;color:#fff;padding:80px 20px;position:relative;overflow:hidden;}
 .aa-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:60px;position:relative;z-index:10;}
-.aa-hero-content{flex:1;}
-.aa-hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.15;margin-bottom:20px;}
-.aa-hero h1 span{color:var(--aa-green);}
-.aa-hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-bottom:30px;line-height:1.6;max-width:480px;}
-.aa-trust-badges{display:flex;align-items:center;gap:20px;margin-top:40px;flex-wrap:wrap;}
-.aa-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);padding:8px 16px;border-radius:30px;font-size:13px;font-weight:600;}
+.background-video-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:rgba(0,0,0,0.5);}
+.background-video{width:100%;height:100%;object-fit:cover;opacity:0.6;}
+.aa-hero-content{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.aa-hero h1{font-size:clamp(28px,4.5vw,48px);font-weight:600;line-height:1.2;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px;}
+.aa-hero p{font-size:18px;color:rgba(255,255,255,0.9);margin:0 auto 30px;line-height:1.6;max-width:600px;}
 
 /* Stats Banner */
 .aa-stats-banner{background:#fff;border-bottom:1px solid var(--aa-border);padding:30px 20px;}
@@ -80,19 +75,19 @@ body{font-family:'Poppins',sans-serif;}
 .aa-section{padding:80px 20px;}
 .aa-section.light{background:var(--aa-light-bg);}
 .aa-title-center{text-align:center;margin-bottom:50px;}
-.aa-sec-eyebrow{font-size:13px;font-weight:700;color:var(--aa-green);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.aa-sec-eyebrow{font-size:13px;font-weight:700;color:var(--aa-primary-h);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
 .aa-sec-title{font-size:36px;font-weight:800;color:var(--aa-navy);line-height:1.2;}
 
 /* Services Grid */
 .aa-services{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:30px;max-width:1200px;margin:0 auto;}
 .aa-service-card{background:#fff;border-radius:12px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:transform 0.3s;border:1px solid var(--aa-border);}
-.aa-service-card:hover{transform:translateY(-5px);border-color:var(--aa-green);}
-.aa-service-icon{width:60px;height:60px;background:rgba(0,162,92,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--aa-green);}
+.aa-service-card:hover{transform:translateY(-5px);border-color:var(--aa-primary);}
+.aa-service-icon{width:60px;height:60px;background:rgba(251,188,4,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--aa-primary-h);}
 .aa-service-card h3{font-size:20px;font-weight:700;color:var(--aa-navy);margin-bottom:12px;}
 .aa-service-card p{font-size:15px;color:var(--aa-muted);line-height:1.6;}
 
 /* Form */
-.aa-form-wrap{max-width:800px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 40px rgba(21,54,123,0.08);overflow:hidden;}
+.aa-form-wrap{max-width:800px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.08);overflow:hidden;}
 .aa-form-header{background:var(--aa-navy);color:#fff;padding:30px 40px;position:relative;}
 .aa-form-header h2{font-size:24px;font-weight:800;margin-bottom:8px;}
 .aa-form-header p{font-size:14px;color:rgba(255,255,255,0.8);}
@@ -103,7 +98,7 @@ body{font-family:'Poppins',sans-serif;}
 @media(max-width:640px){.aa-g2,.aa-g3{grid-template-columns:1fr;}}
 .aa-lbl{display:block;font-size:13px;font-weight:600;color:var(--aa-navy);margin-bottom:6px;}
 .aa-in{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:6px;padding:0 16px;font-size:15px;font-family:inherit;color:var(--aa-text);background:#fff;transition:border-color 0.2s;outline:none;}
-.aa-in:focus{border-color:var(--aa-green);box-shadow:0 0 0 3px rgba(0,162,92,0.1);}
+.aa-in:focus{border-color:var(--aa-primary);box-shadow:0 0 0 3px rgba(251,188,4,0.2);}
 .aa-in::placeholder{color:#94a3b8;}
 .aa-err{font-size:12px;color:#e11d48;margin-top:4px;}
 .aa-fgroup{margin-bottom:20px;}
@@ -111,9 +106,9 @@ body{font-family:'Poppins',sans-serif;}
 .aa-icon-field{position:relative;}
 .aa-icon-field input{padding-right:40px;}
 .aa-icon-field .fi{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#94a3b8;}
-.aa-client-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,162,92,0.1);color:var(--aa-green);border:1px solid rgba(0,162,92,0.2);border-radius:4px;padding:12px 20px;font-size:14px;font-weight:600;margin-bottom:30px;width:100%;}
-.aa-submit{width:100%;height:56px;background:var(--aa-green);color:#fff;border:none;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:background 0.2s;}
-.aa-submit:hover:not(:disabled){background:var(--aa-green-h);}
+.aa-client-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(251,188,4,0.1);color:var(--aa-primary-h);border:1px solid rgba(251,188,4,0.3);border-radius:4px;padding:12px 20px;font-size:14px;font-weight:600;margin-bottom:30px;width:100%;}
+.aa-submit{width:100%;height:56px;background:var(--aa-primary);color:#111;border:none;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:background 0.2s;}
+.aa-submit:hover:not(:disabled){background:var(--aa-primary-h);}
 .aa-submit:disabled{opacity:0.7;cursor:not-allowed;}
 .aa-fine{font-size:12px;color:var(--aa-muted);text-align:center;margin-top:20px;line-height:1.6;}
 
@@ -121,7 +116,7 @@ body{font-family:'Poppins',sans-serif;}
 .aa-footer{background:var(--aa-navy-dark);color:#fff;padding:60px 20px 30px;}
 .aa-ft-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:40px;margin-bottom:30px;}
 .aa-ft-brand p{font-size:14px;color:rgba(255,255,255,0.7);max-width:300px;margin-top:16px;line-height:1.6;}
-.aa-ft-contact a{display:block;color:var(--aa-green);font-size:14px;font-weight:600;margin-bottom:8px;text-decoration:none;}
+.aa-ft-contact a{display:block;color:var(--aa-primary);font-size:14px;font-weight:600;margin-bottom:8px;text-decoration:none;}
 .aa-fb{text-align:center;font-size:13px;color:rgba(255,255,255,0.5);}
 
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -130,7 +125,6 @@ body{font-family:'Poppins',sans-serif;}
 @media(max-width:900px){
   .aa-hero-inner{flex-direction:column;text-align:center;}
   .aa-hero p{margin:0 auto 30px;}
-  .aa-trust-badges{justify-content:center;}
   .aa-nav-links{display:none;}
 }
 `;
@@ -164,7 +158,7 @@ export default function AdvanceAmericaApply() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => { document.title = "Advance America Funds - Bad Credit Loans"; }, []);
+  useEffect(() => { document.title = "Advance America - Bad Credit Loans | Advance America Lending"; }, []);
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -214,8 +208,8 @@ export default function AdvanceAmericaApply() {
     <div style={{minHeight:"100vh",background:"var(--aa-light-bg)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Poppins',sans-serif"}}>
       <style>{CSS}</style>
       <div style={{background:"#fff",borderRadius:16,padding:"50px 40px",maxWidth:480,textAlign:"center",boxShadow:"0 10px 40px rgba(0,0,0,0.08)"}}>
-        <div style={{width:72,height:72,borderRadius:"50%",background:"rgba(0,162,92,0.1)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--aa-green)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div style={{width:72,height:72,borderRadius:"50%",background:"rgba(251,188,4,0.1)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--aa-primary)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 style={{fontSize:26,fontWeight:800,color:"var(--aa-navy)",marginBottom:12}}>Application Received!</h2>
         <p style={{fontSize:16,color:"var(--aa-muted)",lineHeight:1.6}}>Thank you for choosing Advance America Funds. Our lending team will review your details and contact you shortly.</p>
@@ -243,27 +237,35 @@ export default function AdvanceAmericaApply() {
             <a href="#" className="aa-nav-item">Loans</a>
             <a href="#" className="aa-nav-item">Services</a>
             <a href="#" className="aa-nav-item">Bank Authentication</a>
-            <a href="#" className="aa-btn-primary">Account Link</a>
+            <a href="#" className="aa-btn-nav">Account Link</a>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
       <section className="aa-hero">
+        <div className="background-video-container">
+          <video autoPlay loop muted playsInline className="background-video" poster="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/YD0EMK5bgBTZPx84/advance-america-YbN4pkJxywhZZZ4p.jpeg">
+            <source src="https://assets.zyrosite.com/YD0EMK5bgBTZPx84/traffic.txt" type="video/mp4" />
+          </video>
+        </div>
         <div className="aa-hero-inner">
           <div className="aa-hero-content">
-            <h1>Seamless Lending Solutions <span>Tailored</span> For Your Needs</h1>
-            <p>We specialize in providing reliable lending solutions to help you achieve your financial goals. Bad credit score approved on the same day!</p>
-            <a href="#apply" className="aa-btn-primary" style={{padding:"14px 32px",fontSize:"16px"}}>Get Started Now</a>
-            <div className="aa-trust-badges">
-              <div className="aa-badge"><ShieldIcon/> 256-bit Secure</div>
-              <div style={{display:"flex",alignItems:"center",gap:"10px",fontSize:"13px",fontWeight:600}}>
-                <StarRating/> 4.8 out of 5
-              </div>
+            <h1>Advance America - Bad Credit Loans</h1>
+            <div style={{display:"flex",alignItems:"center",gap:"10px",fontSize:"13px",fontWeight:600,marginBottom:"20px"}}>
+              <StarRating/> 4.8 out of 5
             </div>
+            <p>Discover flexible lending solutions at Advance America, specializing in bad credit loans, collateral loans, and gold-backed loans with guaranteed repayment options.</p>
+            <a href="#apply" className="aa-btn-primary" style={{padding:"14px 32px",fontSize:"16px"}}>Get Started</a>
           </div>
         </div>
       </section>
+
+      {/* Trust Pilot */}
+      <div style={{textAlign:"center",padding:"20px",background:"var(--aa-light-bg)"}}>
+        <h3>Your Trusted Lending Partner</h3>
+        <p>we specialize in providing reliable lending solutions to help you achieve your financial goals. Bad credit score approved on the same day!</p>
+      </div>
 
       {/* Stats */}
       <div className="aa-stats-banner">
@@ -304,17 +306,21 @@ export default function AdvanceAmericaApply() {
             <h3>Collateral Loans</h3>
             <p>Secure loans backed by your valuable assets. Including gold-backed loans providing high capital injection instantly.</p>
           </div>
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3>Same Day Approval</h3>
-            <p>Our streamlined verification process ensures you get your money when you need it most, without unnecessary delays.</p>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="aa-section light">
+        <div style={{maxWidth:"600px",margin:"0 auto",textAlign:"center"}}>
+          <p style={{fontSize:"18px",fontStyle:"italic"}}>"Advance America Lending made my loan process easy and stress-free!"</p>
+          <p style={{fontWeight:"bold",marginTop:"10px"}}>Victor</p>
+          <div style={{display:"flex",justifyContent:"center",marginTop:"10px"}}>
+            <StarRating/>
           </div>
         </div>
       </section>
 
-      {/* Form Section */}
+      {/* Application Form */}
       <section className="aa-section" id="apply">
         <div className="aa-form-wrap">
           <div className="aa-form-header">
@@ -399,26 +405,23 @@ export default function AdvanceAmericaApply() {
       <footer className="aa-footer">
         <div className="aa-ft-inner">
           <div className="aa-ft-brand">
-            <div style={{display:"flex",alignItems:"center",gap:12}}>
-              <AALogo/>
-              <span style={{fontSize:20,fontWeight:800,letterSpacing:"-0.5px"}}>Advance America</span>
-            </div>
-            <p>Advance America Lending made my loan process easy and stress-free! Rating 4.8 out of 5 based on 158,874+ trusted reviews.</p>
+            <AALogo/>
+            <p>Advance America Lending made my loan process easy and stress-free!</p>
           </div>
           <div>
-            <h4 style={{fontSize:16,marginBottom:15,color:"var(--aa-green)"}}>Contact Us</h4>
+            <h4 style={{fontSize:16,marginBottom:15,color:"var(--aa-primary)"}}>Advance America Lending. LTD</h4>
             <div className="aa-ft-contact">
-              <a href="mailto:advanceamerica.01156@gmail.com">advanceamerica.2308@gmail.com</a>
+              <a href="mailto:advanceamerica.01156@gmail.com">advanceamerica.01156@gmail.com</a>
               <a href="tel:+14427990717">+1(442)799-0717</a>
+              <p style={{fontSize:14,color:"rgba(255,255,255,0.6)",marginTop:10,maxWidth:250}}>
+                Advance America Lending. LTD<br/>
+                2602 E Fletcher Ave Unit 10, Tampa FL 33612
+              </p>
             </div>
-            <p style={{fontSize:14,color:"rgba(255,255,255,0.6)",marginTop:10,maxWidth:250}}>
-              Advance America Lending. LTD<br/>
-              2602 E Fletcher Ave Unit 10, Tampa FL 33612
-            </p>
           </div>
         </div>
         <div className="aa-fb">
-          © {new Date().getFullYear()} Advance America Lending. All rights reserved.
+          © 2025. All rights reserved Advance America Lending
         </div>
       </footer>
     </div>
