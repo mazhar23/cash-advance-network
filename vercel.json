@@ -9,6 +9,10 @@
       "destination": "/lendingclub-apply.html"
     },
     {
+      "source": "/advanceamerica-apply",
+      "destination": "/advanceamerica-apply.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
