@@ -13,6 +13,10 @@
       "destination": "/advanceamerica-apply.html"
     },
     {
+      "source": "/prosper-apply",
+      "destination": "/prosper-apply.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

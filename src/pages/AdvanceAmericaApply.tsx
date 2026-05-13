@@ -120,6 +120,9 @@ body{font-family:'Poppins',sans-serif;}
 .aa-fb{text-align:center;font-size:13px;color:rgba(255,255,255,0.5);}
 
 @keyframes spin{to{transform:rotate(360deg);}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,20%,53%,80%,to{transform:translate3d(0,0,0);}40%,43%{transform:translate3d(0,-30px,0);}70%{transform:translate3d(0,-15px,0);}90%{transform:translate3d(0,-4px,0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-100px);}to{opacity:1;transform:translateX(0);}}
 .aa-spin{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
 
 @media(max-width:900px){
@@ -157,6 +160,18 @@ export default function AdvanceAmericaApply() {
   const [client, setClient] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loanAmount, setLoanAmount] = useState('');
+  const [interestRate, setInterestRate] = useState('');
+  const [term, setTerm] = useState('');
+  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
+  const [activeTool, setActiveTool] = useState('loan-calculator');
+  // Credit Simulator
+  const [currentScore, setCurrentScore] = useState(720);
+  const [projectedScore, setProjectedScore] = useState(720);
+  // Debt Consolidation
+  const [debts, setDebts] = useState([{ balance: 8500, rate: 18.99, payment: 255, name: 'Credit Card 1' }, { balance: 12000, rate: 22.49, payment: 360, name: 'Credit Card 2' }]);
+  const [consolidationRate, setConsolidationRate] = useState(9.99);
+  const [consolidationTerm, setConsolidationTerm] = useState(48);
 
   useEffect(() => { document.title = "Advance America - Bad Credit Loans | Advance America Lending"; }, []);
 
@@ -202,6 +217,31 @@ export default function AdvanceAmericaApply() {
     } catch(err:any) {
       alert(`Error: ${err.message||"Please try again."}`);
     } finally { setIsSubmitting(false); }
+  };
+
+  const handleCalculate = (e: React.FormEvent) => {
+    e.preventDefault();
+    const principal = parseFloat(loanAmount);
+    const rate = parseFloat(interestRate) / 100 / 12;
+    const months = parseFloat(term) * 12;
+    const payment = (principal * rate) / (1 - Math.pow(1 + rate, -months));
+    setMonthlyPayment(payment);
+  };
+
+  const handleCreditSimulate = () => {
+    // Simple simulation: adjust score based on factors
+    let score = currentScore;
+    // For demo, add some points
+    score += 20;
+    setProjectedScore(score);
+  };
+
+  const calculateDebtConsolidation = () => {
+    const totalDebt = debts.reduce((sum, debt) => sum + debt.balance, 0);
+    const totalCurrentPayment = debts.reduce((sum, debt) => sum + debt.payment, 0);
+    const consolidationPayment = (totalDebt * (consolidationRate / 100 / 12)) / (1 - Math.pow(1 + (consolidationRate / 100 / 12), -consolidationTerm));
+    const savings = totalCurrentPayment - consolidationPayment;
+    return { totalDebt, totalCurrentPayment, consolidationPayment, savings };
   };
 
   if (submitted) return (
@@ -309,6 +349,37 @@ export default function AdvanceAmericaApply() {
         </div>
       </section>
 
+      {/* Loans */}
+      <section className="aa-section" id="loans">
+        <div className="aa-title-center">
+          <div className="aa-sec-eyebrow">Loans</div>
+          <h2 className="aa-sec-title">Explore our loan options</h2>
+        </div>
+        <div className="aa-services">
+          <div className="aa-service-card">
+            <div className="aa-service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Personal Loans</h3>
+            <p>Flexible personal loans for unexpected expenses, debt consolidation, or major purchases. Enjoy low interest rates starting from 6.99%, no collateral required, quick approval in as little as 24 hours, and repayment terms up to 7 years. Ideal for individuals with fair to good credit.</p>
+          </div>
+          <div className="aa-service-card">
+            <div className="aa-service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+            </div>
+            <h3>Home Loans</h3>
+            <p>Mortgage loans for buying your dream home or refinancing existing loans. Benefit from competitive rates as low as 3.5%, long-term repayment up to 30 years, tax deductions, and building equity. Available for first-time buyers and experienced homeowners with various credit profiles.</p>
+          </div>
+          <div className="aa-service-card">
+            <div className="aa-service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            </div>
+            <h3>Auto Loans</h3>
+            <p>Financing for new or used vehicles with loan amounts up to $50,000. Enjoy flexible terms from 24 to 84 months, competitive rates starting at 4.99%, quick approval, and the ability to include taxes and fees. Perfect for buying cars, trucks, motorcycles, or RVs.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonial */}
       <section className="aa-section light">
         <div style={{maxWidth:"600px",margin:"0 auto",textAlign:"center"}}>
@@ -318,6 +389,145 @@ export default function AdvanceAmericaApply() {
             <StarRating/>
           </div>
         </div>
+      </section>
+
+      {/* Financial Tools */}
+      <section className="aa-section light" id="calculator">
+        <div className="aa-title-center">
+          <div className="aa-sec-eyebrow">Tools</div>
+          <h2 className="aa-sec-title">Financial Tools Dashboard</h2>
+        </div>
+
+        {/* Tabs */}
+        <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '40px', flexWrap: 'wrap'}}>
+          <button
+            onClick={() => setActiveTool('loan-calculator')}
+            className={`aa-btn-primary ${activeTool === 'loan-calculator' ? '' : 'opacity-50'}`}
+            style={{padding: '10px 20px', fontSize: '14px'}}
+          >
+            Loan Calculator
+          </button>
+          <button
+            onClick={() => setActiveTool('credit-simulator')}
+            className={`aa-btn-primary ${activeTool === 'credit-simulator' ? '' : 'opacity-50'}`}
+            style={{padding: '10px 20px', fontSize: '14px'}}
+          >
+            Credit Simulator
+          </button>
+          <button
+            onClick={() => setActiveTool('debt-consolidation')}
+            className={`aa-btn-primary ${activeTool === 'debt-consolidation' ? '' : 'opacity-50'}`}
+            style={{padding: '10px 20px', fontSize: '14px'}}
+          >
+            Debt Consolidation
+          </button>
+        </div>
+
+        {/* Loan Calculator */}
+        {activeTool === 'loan-calculator' && (
+          <div style={{maxWidth: '600px', margin: '0 auto'}}>
+            <form onSubmit={handleCalculate}>
+              <div className="aa-fgroup">
+                <label className="aa-lbl">Loan Amount ($)</label>
+                <input className="aa-in" type="number" value={loanAmount} onChange={e => setLoanAmount(e.target.value)} required />
+              </div>
+              <div className="aa-fgroup">
+                <label className="aa-lbl">Annual Interest Rate (%)</label>
+                <input className="aa-in" type="number" step="0.01" value={interestRate} onChange={e => setInterestRate(e.target.value)} required />
+              </div>
+              <div className="aa-fgroup">
+                <label className="aa-lbl">Loan Term (years)</label>
+                <input className="aa-in" type="number" value={term} onChange={e => setTerm(e.target.value)} required />
+              </div>
+              <button type="submit" className="aa-btn-primary">Calculate</button>
+            </form>
+            {monthlyPayment && (
+              <div style={{marginTop: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)', animation: 'fadeIn 0.5s'}}>
+                <h3 style={{color: 'var(--aa-navy)'}}>Estimated Monthly Payment: ${monthlyPayment.toFixed(2)}</h3>
+                <p style={{fontSize: '14px', color: 'var(--aa-muted)', marginTop: '10px'}}>This is an estimate and does not include taxes, fees, or insurance. Actual payments may vary based on your credit profile and lender terms.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Credit Simulator */}
+        {activeTool === 'credit-simulator' && (
+          <div style={{maxWidth: '800px', margin: '0 auto'}}>
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
+              <div>
+                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Credit Score Simulator</h3>
+                <div className="aa-fgroup">
+                  <label className="aa-lbl">Current Credit Score</label>
+                  <input className="aa-in" type="number" value={currentScore} onChange={e => setCurrentScore(Number(e.target.value))} />
+                </div>
+                <button onClick={handleCreditSimulate} className="aa-btn-primary" style={{width: '100%'}}>Simulate</button>
+              </div>
+              <div>
+                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Projected Score</h3>
+                <div style={{textAlign: 'center', padding: '40px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
+                  <div style={{fontSize: '48px', fontWeight: 'bold', color: 'var(--aa-primary)', animation: projectedScore !== currentScore ? 'bounce 0.5s' : 'none'}}>{projectedScore}</div>
+                  <p>FICO Score</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Debt Consolidation */}
+        {activeTool === 'debt-consolidation' && (
+          <div style={{maxWidth: '800px', margin: '0 auto'}}>
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
+              <div>
+                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Current Debts</h3>
+                {debts.map((debt, index) => (
+                  <div key={index} style={{marginBottom: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
+                    <input className="aa-in" placeholder="Debt Name" value={debt.name} onChange={e => {
+                      const newDebts = [...debts];
+                      newDebts[index].name = e.target.value;
+                      setDebts(newDebts);
+                    }} />
+                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '10px'}}>
+                      <input className="aa-in" type="number" placeholder="Balance" value={debt.balance} onChange={e => {
+                        const newDebts = [...debts];
+                        newDebts[index].balance = Number(e.target.value);
+                        setDebts(newDebts);
+                      }} />
+                      <input className="aa-in" type="number" step="0.01" placeholder="APR %" value={debt.rate} onChange={e => {
+                        const newDebts = [...debts];
+                        newDebts[index].rate = Number(e.target.value);
+                        setDebts(newDebts);
+                      }} />
+                      <input className="aa-in" type="number" placeholder="Min Payment" value={debt.payment} onChange={e => {
+                        const newDebts = [...debts];
+                        newDebts[index].payment = Number(e.target.value);
+                        setDebts(newDebts);
+                      }} />
+                    </div>
+                  </div>
+                ))}
+                <button onClick={() => setDebts([...debts, { balance: 0, rate: 0, payment: 0, name: 'New Debt' }])} className="aa-btn-primary" style={{width: '100%'}}>Add Debt</button>
+                <div style={{marginTop: '20px'}}>
+                  <label className="aa-lbl">Consolidation APR (%)</label>
+                  <input className="aa-in" type="number" step="0.01" value={consolidationRate} onChange={e => setConsolidationRate(Number(e.target.value))} />
+                  <label className="aa-lbl">Term (months)</label>
+                  <input className="aa-in" type="number" value={consolidationTerm} onChange={e => setConsolidationTerm(Number(e.target.value))} />
+                </div>
+              </div>
+              <div>
+                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Consolidation Savings</h3>
+                <div style={{padding: '20px', background: 'var(--aa-primary)', color: '#fff', borderRadius: '8px', textAlign: 'center', animation: 'slideIn 0.5s'}}>
+                  <div style={{fontSize: '36px', fontWeight: 'bold'}}>${calculateDebtConsolidation().savings.toFixed(2)}</div>
+                  <p>Monthly Savings</p>
+                </div>
+                <div style={{marginTop: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
+                  <p><strong>Total Debt:</strong> ${calculateDebtConsolidation().totalDebt.toFixed(2)}</p>
+                  <p><strong>Current Payment:</strong> ${calculateDebtConsolidation().totalCurrentPayment.toFixed(2)}</p>
+                  <p><strong>New Payment:</strong> ${calculateDebtConsolidation().consolidationPayment.toFixed(2)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Application Form */}
@@ -411,8 +621,6 @@ export default function AdvanceAmericaApply() {
           <div>
             <h4 style={{fontSize:16,marginBottom:15,color:"var(--aa-primary)"}}>Advance America Lending. LTD</h4>
             <div className="aa-ft-contact">
-              <a href="mailto:advanceamerica.01156@gmail.com">advanceamerica.01156@gmail.com</a>
-              <a href="tel:+14427990717">+1(442)799-0717</a>
               <p style={{fontSize:14,color:"rgba(255,255,255,0.6)",marginTop:10,maxWidth:250}}>
                 Advance America Lending. LTD<br/>
                 2602 E Fletcher Ave Unit 10, Tampa FL 33612

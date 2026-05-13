@@ -27,6 +27,7 @@ import StandaloneApply from "./pages/StandaloneApply";
 import AdminClients from "./pages/AdminClients";
 import LendingClubApply from "./pages/LendingClubApply";
 import AdvanceAmericaApply from "./pages/AdvanceAmericaApply";
+import ProsperApply from "./pages/ProsperApply";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/admin-clients" element={<AdminClients />} />
           <Route path="/lendingclub-apply" element={<LendingClubApply />} />
           <Route path="/advanceamerica-apply" element={<AdvanceAmericaApply />} />
+          <Route path="/prosper-apply" element={<ProsperApply />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
