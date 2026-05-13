@@ -256,6 +256,8 @@ const AdminClients = () => {
               style={{ width: '100%', padding: '0.75rem', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '1rem', backgroundColor: 'white', outline: 'none', cursor: 'pointer' }}
             >
               <option value="lendingclub-apply">🏦 LendingClub Style Page</option>
+              <option value="advanceamerica-apply">🇺🇸 Advance America Style Page</option>
+              <option value="prosper-apply">🤝 Prosper Style Page</option>
               <option value="standalone-apply">📋 Standard Apply Page</option>
             </select>
           </div>
