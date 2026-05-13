@@ -22,85 +22,113 @@ const formSchema = z.object({
 });
 type FormData = z.infer<typeof formSchema>;
 
-/* ─── Prosper Logo ─── */
-const ProsperLogo = () => (
-  <svg width="120" height="32" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="16" cy="16" r="16" fill="#6B3FA0"/>
-    <path d="M10 22L16 10L22 22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 18h8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-    <text x="36" y="22" fontFamily="Georgia, serif" fontSize="18" fontWeight="bold" fill="#1A1A2E">Prosper</text>
-  </svg>
+/* ─── Real Prosper Logo from Blob Storage ─── */
+const PROSPER_LOGO_URL = "https://ootfjnwuwcxpkpan.public.blob.vercel-storage.com/public/prosper-logo-pr20.svg";
+
+const ProsperLogo = ({ height = 36 }: { height?: number }) => (
+  <img src={PROSPER_LOGO_URL} alt="Prosper" height={height} style={{height,width:"auto",display:"block"}} />
 );
 
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;}
+body{font-family:'Plus Jakarta Sans',sans-serif;}
 :root{
-  --pr-purple: #6B3FA0;
-  --pr-purple-dark: #4f2d7f;
-  --pr-purple-light: #f3eeff;
-  --pr-teal: #00A896;
-  --pr-teal-dark: #007d6f;
-  --pr-dark: #1A1A2E;
-  --pr-gray: #6b7280;
-  --pr-gray-light: #f9fafb;
-  --pr-border: #e5e7eb;
-  --pr-white: #ffffff;
+  /* Prosper.com exact brand colors */
+  --pr-dark:       #2D3545;
+  --pr-dark2:      #1e2635;
+  --pr-orange:     #F26B21;
+  --pr-orange-h:   #d45a14;
+  --pr-pink:       #D81265;
+  --pr-orange-lt:  #fff3ed;
+  --pr-pink-lt:    #fde8f1;
+  /* aliases used throughout */
+  --pr-purple:     #F26B21;
+  --pr-purple-dark:#d45a14;
+  --pr-purple-light:#fff3ed;
+  --pr-teal:       #D81265;
+  --pr-teal-dark:  #b00d52;
+  --pr-gray:       #6b7280;
+  --pr-gray-light: #f7f8fa;
+  --pr-border:     #e5e7eb;
+  --pr-white:      #ffffff;
 }
 
 /* ─ Alert Banner ─ */
-.pr-alert{background:#fff8e1;border-bottom:1px solid #f59e0b;padding:10px 20px;font-size:12.5px;color:#92400e;text-align:center;line-height:1.5;}
-.pr-alert a{color:#92400e;font-weight:600;}
+.pr-alert{background:#fef3c7;border-bottom:1px solid #f59e0b;padding:10px 20px;font-size:12.5px;color:#78350f;text-align:center;line-height:1.5;}
+.pr-alert a{color:#92400e;font-weight:600;text-decoration:underline;}
 
 /* ─ Nav ─ */
-.pr-nav{background:var(--pr-white);border-bottom:1px solid var(--pr-border);position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
-.pr-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.pr-nav-left{display:flex;align-items:center;gap:32px;}
-.pr-nav-links{display:flex;align-items:center;gap:6px;}
-.pr-nav-item{font-size:14px;font-weight:500;color:var(--pr-dark);padding:8px 12px;border-radius:6px;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
-.pr-nav-item:hover{background:var(--pr-gray-light);}
+.pr-nav{background:var(--pr-white);border-bottom:1px solid var(--pr-border);position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.pr-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.pr-nav-left{display:flex;align-items:center;gap:36px;}
+.pr-nav-links{display:flex;align-items:center;gap:4px;}
+.pr-nav-item{font-size:14px;font-weight:500;color:var(--pr-dark);padding:8px 14px;border-radius:6px;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.pr-nav-item:hover{background:var(--pr-gray-light);color:var(--pr-orange);}
 .pr-nav-right{display:flex;align-items:center;gap:12px;}
-.pr-login-btn{font-size:14px;font-weight:600;color:var(--pr-purple);background:none;border:none;cursor:pointer;padding:8px 16px;}
-.pr-cta-btn{background:var(--pr-purple);color:#fff;border:none;padding:10px 22px;border-radius:25px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.pr-cta-btn:hover{background:var(--pr-purple-dark);transform:translateY(-1px);}
+.pr-login-btn{font-size:14px;font-weight:600;color:var(--pr-dark);background:none;border:1px solid var(--pr-border);border-radius:25px;cursor:pointer;padding:8px 20px;transition:all 0.2s;}
+.pr-login-btn:hover{border-color:var(--pr-orange);color:var(--pr-orange);}
+.pr-cta-btn{background:var(--pr-orange);color:#fff;border:none;padding:10px 24px;border-radius:25px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.pr-cta-btn:hover{background:var(--pr-orange-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(242,107,33,0.3);}
 
 /* ─ Hero ─ */
-.pr-hero{background:linear-gradient(135deg,#f8f0ff 0%,#e8f4f8 100%);padding:60px 24px 0;overflow:hidden;}
+.pr-hero{background:linear-gradient(160deg,#fff8f4 0%,#fef3fb 50%,#f0f4ff 100%);padding:60px 24px 0;overflow:hidden;}
 .pr-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
 .pr-hero-left{padding-bottom:60px;}
-.pr-hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--pr-border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--pr-gray);margin-bottom:20px;}
-.pr-hero-h1{font-size:clamp(32px,4vw,50px);font-weight:800;color:var(--pr-dark);line-height:1.15;margin-bottom:16px;letter-spacing:-0.5px;}
+.pr-hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--pr-border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--pr-gray);margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.pr-hero-h1{font-size:clamp(30px,3.8vw,48px);font-weight:800;color:var(--pr-dark);line-height:1.12;margin-bottom:16px;letter-spacing:-0.5px;font-family:'Plus Jakarta Sans',sans-serif;}
 .pr-hero-sub{font-size:16px;color:var(--pr-gray);line-height:1.65;margin-bottom:32px;max-width:460px;}
 
 /* Product Tabs */
-.pr-tabs{display:flex;gap:0;border:1px solid var(--pr-border);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:24px;}
+.pr-tabs{display:flex;gap:0;border:1px solid var(--pr-border);border-radius:12px;background:#fff;overflow:hidden;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 .pr-tab{flex:1;padding:14px 8px;font-size:13px;font-weight:600;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--pr-gray);border:none;background:none;border-right:1px solid var(--pr-border);}
 .pr-tab:last-child{border-right:none;}
-.pr-tab.active{background:var(--pr-purple);color:#fff;}
-.pr-tab-content{background:#fff;border:1px solid var(--pr-border);border-radius:12px;padding:24px;}
+.pr-tab.active{background:var(--pr-orange);color:#fff;}
+.pr-tab-content{background:#fff;border:1px solid var(--pr-border);border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 
 /* Loan amount tab */
 .pr-amount-label{font-size:12px;font-weight:600;color:var(--pr-gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .pr-amount-disp{font-size:40px;font-weight:800;color:var(--pr-dark);margin-bottom:4px;}
 .pr-amount-sub{font-size:13px;color:var(--pr-gray);margin-bottom:16px;}
-.pr-range{width:100%;accent-color:var(--pr-purple);margin-bottom:16px;}
+.pr-range{width:100%;accent-color:var(--pr-orange);margin-bottom:16px;}
 .pr-benefit{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--pr-dark);margin:6px 0;}
-.pr-apply-btn{width:100%;height:48px;background:var(--pr-purple);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:background 0.2s;margin-top:8px;}
-.pr-apply-btn:hover{background:var(--pr-purple-dark);}
-.pr-apply-btn.teal{background:var(--pr-teal);}
+.pr-apply-btn{width:100%;height:48px;background:var(--pr-orange);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.pr-apply-btn:hover{background:var(--pr-orange-h);box-shadow:0 4px 12px rgba(242,107,33,0.3);}
+.pr-apply-btn.teal{background:var(--pr-pink);}
 .pr-apply-btn.teal:hover{background:var(--pr-teal-dark);}
 
 /* Hero image */
 .pr-hero-right{position:relative;align-self:end;}
-.pr-hero-img{width:100%;height:440px;object-fit:cover;border-radius:20px 20px 0 0;display:block;}
-.pr-hero-img-placeholder{width:100%;height:440px;background:linear-gradient(135deg,#c4b5fd,#93c5fd);border-radius:20px 20px 0 0;display:flex;align-items:center;justify-content:center;}
+.pr-hero-img-stack{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:440px;}
+.pr-hero-img-a{grid-column:1;grid-row:1/3;border-radius:20px 0 0 20px;object-fit:cover;width:100%;height:100%;}
+.pr-hero-img-b{grid-column:2;grid-row:1;border-radius:0 20px 0 0;object-fit:cover;width:100%;height:100%;}
+.pr-hero-img-c{grid-column:2;grid-row:2;border-radius:0 0 20px 0;object-fit:cover;width:100%;height:100%;}
+.pr-loan-card{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.1);padding:14px 18px;display:flex;align-items:center;gap:14px;position:absolute;right:8px;white-space:nowrap;}
+.pr-loan-card.card-top{top:-16px;}
+.pr-loan-card.card-bot{bottom:24px;}
+.pr-loan-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.pr-loan-avatar-placeholder{width:44px;height:44px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pr-loan-name{font-size:13.5px;font-weight:700;color:#2D3545;}
+.pr-loan-amount{font-size:13.5px;font-weight:700;color:#2D3545;}
+.pr-loan-sub{font-size:12px;color:#9ca3af;margin-top:1px;}
+.pr-loan-check{width:28px;height:28px;border-radius:50%;background:#fff5ec;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;}
+
+/* Auto Invest (Investing tab) */
+.pr-invest-ui{background:#fff8f4;border-radius:14px;overflow:hidden;}
+.pr-invest-chart{height:120px;position:relative;display:flex;align-items:flex-end;padding:12px 16px 0;}
+.pr-invest-tag{display:inline-flex;align-items:center;gap:10px;background:#fde8d4;border-radius:30px;padding:10px 18px;font-size:13px;font-weight:600;color:#2D3545;position:absolute;top:20px;left:20px;}
+.pr-invest-toggle{width:38px;height:22px;background:#00897B;border-radius:11px;position:relative;flex-shrink:0;}
+.pr-invest-toggle::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:3px;right:3px;}
+.pr-invest-tabs{display:flex;justify-content:center;gap:10px;padding:10px 16px 14px;background:#fff8f4;}
+.pr-invest-tab-btn{padding:6px 20px;border-radius:20px;font-size:13px;font-weight:600;border:none;cursor:pointer;}
+.pr-invest-tab-btn.active{background:#fff;color:#00897B;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.pr-invest-tab-btn:not(.active){background:transparent;color:#9ca3af;}
 
 /* ─ Awards Bar ─ */
-.pr-awards{background:#fff;border-bottom:1px solid var(--pr-border);padding:20px 24px;}
+.pr-awards{background:#fff;border-bottom:1px solid var(--pr-border);padding:24px;}
 .pr-awards-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
 .pr-award{display:flex;align-items:center;gap:10px;font-size:13px;}
-.pr-award-icon{width:36px;height:36px;background:var(--pr-purple-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.pr-award-icon{width:36px;height:36px;background:var(--pr-orange-lt);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
 .pr-award-text b{display:block;font-weight:700;color:var(--pr-dark);}
 .pr-award-text span{color:var(--pr-gray);font-size:12px;}
 .pr-award-sep{width:1px;height:36px;background:var(--pr-border);}
@@ -109,10 +137,11 @@ body{font-family:'Inter',sans-serif;}
 .pr-section{padding:80px 24px;}
 .pr-section-inner{max-width:1200px;margin:0 auto;}
 .pr-section.light{background:var(--pr-gray-light);}
-.pr-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pr-purple);margin-bottom:12px;}
-.pr-title{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:var(--pr-dark);margin-bottom:16px;letter-spacing:-0.3px;}
+.pr-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pr-orange);margin-bottom:12px;}
+.pr-title{font-size:clamp(24px,3.2vw,36px);font-weight:800;color:var(--pr-dark);margin-bottom:16px;letter-spacing:-0.3px;font-family:'Plus Jakarta Sans',sans-serif;}
 .pr-feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;}
-.pr-feat{text-align:center;padding:28px 20px;background:#fff;border-radius:14px;border:1px solid var(--pr-border);}
+.pr-feat{text-align:center;padding:28px 20px;background:#fff;border-radius:14px;border:1px solid var(--pr-border);transition:border-color 0.2s,box-shadow 0.2s;}
+.pr-feat:hover{border-color:var(--pr-orange);box-shadow:0 4px 16px rgba(242,107,33,0.08);}
 .pr-feat-icon{font-size:32px;margin-bottom:14px;}
 .pr-feat h3{font-size:15px;font-weight:700;color:var(--pr-dark);margin-bottom:8px;}
 .pr-feat p{font-size:13px;color:var(--pr-gray);line-height:1.6;}
@@ -120,21 +149,21 @@ body{font-family:'Inter',sans-serif;}
 /* ─ Product cards ─ */
 .pr-prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
 .pr-prod-card{border:1.5px solid var(--pr-border);border-radius:16px;padding:28px;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;}
-.pr-prod-card:hover{border-color:var(--pr-purple);box-shadow:0 8px 24px rgba(107,63,160,0.08);}
-.pr-prod-badge{font-size:11px;font-weight:700;color:var(--pr-purple);background:var(--pr-purple-light);padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;}
+.pr-prod-card:hover{border-color:var(--pr-orange);box-shadow:0 8px 24px rgba(242,107,33,0.08);}
+.pr-prod-badge{font-size:11px;font-weight:700;color:var(--pr-orange);background:var(--pr-orange-lt);padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;}
 .pr-prod-card h3{font-size:18px;font-weight:800;color:var(--pr-dark);margin-bottom:10px;}
 .pr-prod-card p{font-size:14px;color:var(--pr-gray);line-height:1.65;margin-bottom:20px;}
-.pr-prod-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--pr-purple);text-decoration:none;cursor:pointer;}
+.pr-prod-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--pr-orange);text-decoration:none;cursor:pointer;}
 .pr-prod-link:hover{text-decoration:underline;}
 
 /* ─ Credit score quiz ─ */
-.pr-quiz{background:var(--pr-dark);padding:80px 24px;color:#fff;}
+.pr-quiz{background:var(--pr-dark2);padding:80px 24px;color:#fff;}
 .pr-quiz-inner{max-width:800px;margin:0 auto;text-align:center;}
 .pr-quiz-title{font-size:clamp(24px,3vw,36px);font-weight:800;margin-bottom:32px;}
 .pr-scores{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
 .pr-score-btn{padding:14px 20px;border:2px solid rgba(255,255,255,0.2);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;min-width:100px;}
-.pr-score-btn:hover{border-color:var(--pr-purple);background:var(--pr-purple);}
-.pr-score-btn.selected{border-color:var(--pr-purple);background:var(--pr-purple);}
+.pr-score-btn:hover{border-color:var(--pr-orange);background:var(--pr-orange);}
+.pr-score-btn.selected{border-color:var(--pr-orange);background:var(--pr-orange);}
 
 /* ─ Testimonials ─ */
 .pr-testimonials{overflow:hidden;padding:20px 0;}
@@ -147,7 +176,7 @@ body{font-family:'Inter',sans-serif;}
 .pr-t-author{font-size:12.5px;font-weight:600;color:var(--pr-gray);}
 
 /* ─ App section ─ */
-.pr-app-section{background:var(--pr-purple);color:#fff;padding:80px 24px;}
+.pr-app-section{background:var(--pr-dark);color:#fff;padding:80px 24px;}
 .pr-app-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .pr-app-h2{font-size:32px;font-weight:800;margin-bottom:16px;}
 .pr-app-p{font-size:16px;opacity:0.85;line-height:1.65;margin-bottom:28px;}
@@ -160,18 +189,18 @@ body{font-family:'Inter',sans-serif;}
 
 /* ─ Form ─ */
 .pr-form-section{padding:80px 24px;background:var(--pr-gray-light);}
-.pr-form-wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 50px rgba(107,63,160,0.10);overflow:hidden;}
-.pr-form-header{background:linear-gradient(135deg,var(--pr-purple),var(--pr-purple-dark));color:#fff;padding:32px 40px;}
+.pr-form-wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 50px rgba(45,53,69,0.10);overflow:hidden;}
+.pr-form-header{background:linear-gradient(135deg,var(--pr-dark),var(--pr-dark2));color:#fff;padding:32px 40px;}
 .pr-form-header h2{font-size:26px;font-weight:800;margin-bottom:8px;}
 .pr-form-header p{font-size:14px;opacity:0.8;}
 .pr-form-body{padding:40px;}
-.pr-sect-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--pr-purple);background:var(--pr-purple-light);padding:8px 16px;border-radius:6px;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.pr-sect-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--pr-orange);background:var(--pr-orange-lt);padding:8px 16px;border-radius:6px;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
 .pr-g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .pr-g3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;}
 @media(max-width:600px){.pr-g2,.pr-g3{grid-template-columns:1fr;}}
 .pr-lbl{display:block;font-size:12.5px;font-weight:600;color:var(--pr-dark);margin-bottom:5px;}
 .pr-in{width:100%;height:46px;border:1.5px solid var(--pr-border);border-radius:8px;padding:0 14px;font-size:14px;font-family:inherit;color:var(--pr-dark);background:#fff;transition:border-color 0.15s;outline:none;}
-.pr-in:focus{border-color:var(--pr-purple);box-shadow:0 0 0 3px rgba(107,63,160,0.1);}
+.pr-in:focus{border-color:var(--pr-orange);box-shadow:0 0 0 3px rgba(242,107,33,0.12);}
 .pr-in::placeholder{color:#9ca3af;}
 .pr-err{font-size:11.5px;color:#dc2626;margin-top:3px;}
 .pr-fgroup{margin-bottom:16px;}
@@ -179,12 +208,12 @@ body{font-family:'Inter',sans-serif;}
 .pr-icon-field{position:relative;}
 .pr-icon-field input{padding-right:40px;}
 .pr-icon-field .fi{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#9ca3af;}
-.pr-client-badge{display:flex;align-items:center;gap:8px;background:rgba(107,63,160,0.07);color:var(--pr-purple);border:1px solid rgba(107,63,160,0.2);border-radius:8px;padding:14px 20px;font-size:13.5px;font-weight:600;margin-bottom:28px;}
-.pr-submit{width:100%;height:54px;background:var(--pr-purple);color:#fff;border:none;font-size:16px;font-weight:700;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:background 0.2s;}
-.pr-submit:hover:not(:disabled){background:var(--pr-purple-dark);}
+.pr-client-badge{display:flex;align-items:center;gap:8px;background:var(--pr-orange-lt);color:var(--pr-orange);border:1px solid rgba(242,107,33,0.25);border-radius:8px;padding:14px 20px;font-size:13.5px;font-weight:600;margin-bottom:28px;}
+.pr-submit{width:100%;height:54px;background:var(--pr-orange);color:#fff;border:none;font-size:16px;font-weight:700;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:all 0.2s;}
+.pr-submit:hover:not(:disabled){background:var(--pr-orange-h);box-shadow:0 4px 16px rgba(242,107,33,0.35);}
 .pr-submit:disabled{opacity:0.6;cursor:not-allowed;}
 .pr-fine{font-size:12px;color:var(--pr-gray);text-align:center;margin-top:16px;line-height:1.7;}
-.pr-fine a{color:var(--pr-purple);}
+.pr-fine a{color:var(--pr-orange);}
 
 /* ─ Footer ─ */
 .pr-footer{background:var(--pr-dark);color:rgba(255,255,255,0.75);}
@@ -229,7 +258,7 @@ const BankIco = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
 );
 const CheckIco = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pr-purple)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pr-orange)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
 );
 const ChevRight = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -303,9 +332,9 @@ export default function ProsperApply() {
   if (submitted) return (
     <div style={{minHeight:"100vh",background:"var(--pr-gray-light)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Inter',sans-serif"}}>
       <style>{CSS}</style>
-      <div style={{background:"#fff",borderRadius:20,padding:"52px 44px",maxWidth:480,textAlign:"center",boxShadow:"0 10px 40px rgba(107,63,160,0.1)"}}>
-        <div style={{width:72,height:72,borderRadius:"50%",background:"var(--pr-purple-light)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--pr-purple)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div style={{background:"#fff",borderRadius:20,padding:"52px 44px",maxWidth:480,textAlign:"center",boxShadow:"0 10px 40px rgba(45,53,69,0.1)"}}>
+        <div style={{width:72,height:72,borderRadius:"50%",background:"var(--pr-orange-lt)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--pr-orange)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 style={{fontSize:26,fontWeight:800,color:"var(--pr-dark)",marginBottom:12}}>Application Submitted!</h2>
         <p style={{fontSize:15,color:"var(--pr-gray)",lineHeight:1.65}}>Thank you for choosing Prosper. Our team will review your application and connect you with funding options within 1 business day.</p>
@@ -341,10 +370,35 @@ export default function ProsperApply() {
       <button className="pr-apply-btn teal" onClick={()=>document.getElementById("apply-form")?.scrollIntoView({behavior:"smooth"})}>Apply now</button>
     </div>,
     <div>
-      <div className="pr-amount-label">Avg. Historical Return</div>
-      <div className="pr-amount-disp" style={{color:"var(--pr-teal)"}}>5.2%</div>
-      <div className="pr-amount-sub">Weighted average as of Mar 31, 2026</div>
-      {[["Unique investments","Alternative asset class"],["Diversify your portfolio","Beyond stocks & bonds"],["Get started online","100% digital process"]].map(([a,b])=>(
+      <div className="pr-amount-label">Investing & IRAs</div>
+      <div className="pr-amount-disp" style={{color:"var(--pr-teal)",fontSize:32,lineHeight:1.2}}>Diversify your portfolio</div>
+      <div className="pr-amount-sub" style={{marginBottom:8}}>Unique investments · <strong style={{color:"#2D3545"}}>5.2% avg. hist. return</strong><sup style={{fontSize:10}}>4</sup></div>
+      {/* Auto Invest UI */}
+      <div className="pr-invest-ui" style={{marginBottom:14}}>
+        <div className="pr-invest-chart">
+          {/* Wavy chart as SVG */}
+          <svg viewBox="0 0 300 80" style={{width:"100%",height:80,overflow:"visible"}} preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#F26B21" stopOpacity="0.25"/>
+                <stop offset="100%" stopColor="#F26B21" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 70 Q40 60 80 55 Q120 50 150 45 Q180 40 220 30 Q260 20 300 10" fill="none" stroke="#F26B21" strokeWidth="2.5"/>
+            <path d="M0 70 Q40 60 80 55 Q120 50 150 45 Q180 40 220 30 Q260 20 300 10 L300 80 L0 80 Z" fill="url(#chartGrad)"/>
+          </svg>
+          <div className="pr-invest-tag">
+            Auto Invest is on
+            <div className="pr-invest-toggle"/>
+          </div>
+        </div>
+        <div className="pr-invest-tabs">
+          <button className="pr-invest-tab-btn active">3mo</button>
+          <button className="pr-invest-tab-btn">6mo</button>
+          <button className="pr-invest-tab-btn">1yr</button>
+        </div>
+      </div>
+      {[["Unique investments","Alternative asset class"],["Get started online","100% digital process"]].map(([a,b])=>(
         <div key={a} className="pr-benefit"><CheckIco/><div><strong>{a}</strong> — {b}</div></div>
       ))}
       <button className="pr-apply-btn teal" onClick={()=>document.getElementById("apply-form")?.scrollIntoView({behavior:"smooth"})}>Get started</button>
@@ -356,11 +410,6 @@ export default function ProsperApply() {
   return (
     <div style={{fontFamily:"'Inter',sans-serif",color:"var(--pr-dark)",background:"#fff"}}>
       <style>{CSS}</style>
-
-      {/* Alert Banner */}
-      <div className="pr-alert">
-        For the latest information about the September 17, 2025, cybersecurity incident, <a href="#">click here</a>. Questions? See <a href="#">FAQs</a> or call 833-918-9464. Mon–Fri, 8AM–5PM CT.
-      </div>
 
       {/* Nav */}
       <nav className="pr-nav">
@@ -381,6 +430,8 @@ export default function ProsperApply() {
           </div>
         </div>
       </nav>
+
+
 
       {/* Hero */}
       <section className="pr-hero">
@@ -405,68 +456,119 @@ export default function ProsperApply() {
           </div>
 
           <div className="pr-hero-right">
-            <img src="/prosper-hero.png" alt="Happy customers" className="pr-hero-img"
-              onError={e => {
-                (e.target as HTMLImageElement).style.display = "none";
-                if ((e.target as HTMLImageElement).nextElementSibling) {
-                  ((e.target as HTMLImageElement).nextElementSibling as HTMLElement).style.display = "flex";
-                }
-              }}
-            />
-            <div className="pr-hero-img-placeholder" style={{display:"none"}}>
-              <div style={{textAlign:"center",color:"white"}}>
-                <div style={{fontSize:48,marginBottom:12}}>💰</div>
-                <div style={{fontSize:18,fontWeight:700}}>Prosper</div>
-                <div style={{fontSize:14,opacity:0.8}}>Helping people thrive</div>
+            {/* Stacked photos with loan card overlays */}
+            <div className="pr-hero-img-stack">
+              <img src="/prosper-lady.png" alt="Happy customer with laptop" className="pr-hero-img-a"
+                onError={e => { (e.target as HTMLImageElement).src=""; (e.target as HTMLImageElement).style.background="linear-gradient(135deg,#fde8d4,#ffd6b0)"; }}
+              />
+              <img src="/prosper-couple.png" alt="Couple in kitchen" className="pr-hero-img-b"
+                onError={e => { (e.target as HTMLImageElement).src=""; (e.target as HTMLImageElement).style.background="linear-gradient(135deg,#fde8d4,#F26B21,#fff)"; }}
+              />
+              <img src="/prosper-hero.png" alt="Smiling customer" className="pr-hero-img-c"
+                onError={e => { (e.target as HTMLImageElement).src=""; (e.target as HTMLImageElement).style.background="linear-gradient(135deg,#c4b5fd,#93c5fd)"; }}
+              />
+              {/* Floating loan cards */}
+              <div className="pr-loan-card card-top">
+                <div className="pr-loan-avatar-placeholder" style={{background:"#fde8d4"}}>👩</div>
+                <div>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <span className="pr-loan-name">For Deborah</span>
+                    <span style={{color:"#9ca3af",fontWeight:400}}>·</span>
+                    <span className="pr-loan-amount" style={{color:"#2D3545"}}>$42,950</span>
+                  </div>
+                  <div className="pr-loan-sub">Total value</div>
+                </div>
+                <div className="pr-loan-check">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F26B21" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </div>
+              <div className="pr-loan-card card-bot">
+                <div className="pr-loan-avatar-placeholder" style={{background:"#e8f5f3"}}>👩‍🦱</div>
+                <div>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <span className="pr-loan-name">For Lydia</span>
+                    <span style={{color:"#9ca3af",fontWeight:400}}>·</span>
+                    <span className="pr-loan-amount" style={{color:"#2D3545"}}>$8,500</span>
+                  </div>
+                  <div className="pr-loan-sub">Debt consolidation</div>
+                </div>
+                <div className="pr-loan-check">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F26B21" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Awards Bar */}
+      {/* Awards Bar — Money, CNBC, Bankrate, 20yr */}
       <div className="pr-awards">
         <div className="pr-awards-inner">
+          {/* Money magazine */}
           <div className="pr-award">
-            <div className="pr-award-icon">💰</div>
-            <div className="pr-award-text"><b>Money</b><span>Best Personal Loan Companies Top Picks 2026</span></div>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <svg viewBox="0 0 120 40" width="90" height="30">
+                <text x="10" y="28" fontFamily="Georgia,serif" fontSize="26" fontWeight="700" fill="#c8a84b" letterSpacing="1">Money</text>
+                {/* left laurel */}
+                <path d="M4 20 Q2 15 5 12 Q4 17 7 18 Q5 13 8 11 Q7 16 10 17" fill="none" stroke="#c8a84b" strokeWidth="1.2"/>
+              </svg>
+            </div>
+            <div className="pr-award-text"><span>Best Personal Loan<br/>Companies Top Picks 2026</span></div>
           </div>
           <div className="pr-award-sep"/>
+          {/* CNBC */}
           <div className="pr-award">
-            <div className="pr-award-icon">📺</div>
-            <div className="pr-award-text"><b>CNBC</b><span>Top Alternate Finance Companies</span></div>
+            <div style={{display:"flex",alignItems:"center",gap:6}}>
+              <svg viewBox="0 0 80 30" width="60" height="22">
+                <rect x="28" y="5" width="14" height="14" fill="#0275d8" transform="rotate(45 35 12)"/>
+                <text x="5" y="24" fontFamily="Arial,sans-serif" fontSize="18" fontWeight="900" fill="#fff" letterSpacing="-0.5">CNBC</text>
+              </svg>
+            </div>
+            <div className="pr-award-text"><span>Top Alternate<br/>Finance Companies</span></div>
           </div>
           <div className="pr-award-sep"/>
+          {/* Bankrate */}
           <div className="pr-award">
-            <div className="pr-award-icon">⭐</div>
-            <div className="pr-award-text"><b>Bankrate</b><span>Excellent 4.5 Bankrate Score</span></div>
+            <div className="pr-award-icon" style={{background:"#e0f0ff",color:"#0275d8",fontWeight:800,fontSize:13,width:"auto",padding:"4px 10px",borderRadius:6}}>Bankrate</div>
+            <div className="pr-award-text"><span>Excellent 4.5<br/>Bankrate Score</span></div>
           </div>
           <div className="pr-award-sep"/>
+          {/* 20 Years */}
           <div className="pr-award">
-            <div className="pr-award-icon">🏦</div>
-            <div className="pr-award-text"><b>20 Years</b><span>Serving members since 2005</span></div>
+            <div className="pr-award-icon" style={{background:"#fff3ed",fontSize:18,fontWeight:800,color:"#F26B21",width:"auto",padding:"4px 12px",borderRadius:6}}>20+</div>
+            <div className="pr-award-text"><b>Years of Trust</b><span>Serving members since 2005</span></div>
           </div>
         </div>
       </div>
 
-      {/* Why Prosper */}
+      {/* Why Prosper — with beach photo */}
       <section className="pr-section">
         <div className="pr-section-inner">
-          <div className="pr-eyebrow">Why Prosper</div>
-          <h2 className="pr-title">Here to help you thrive</h2>
-          <div className="pr-feat-grid">
-            {[
-              { icon:"💻", title:"100% Online", desc:"Apply from anywhere, anytime. No branch visits required." },
-              { icon:"🔍", title:"Ease & Transparency", desc:"Clear terms, no hidden fees, no surprises." },
-              { icon:"🤝", title:"Human Customer Service", desc:"Real people ready to answer your questions." },
-              { icon:"📅", title:"20 Years Experience", desc:"Helping people thrive since 2005 with $25B+ funded." },
-            ].map(f => (
-              <div key={f.title} className="pr-feat">
-                <div className="pr-feat-icon">{f.icon}</div>
-                <h3>{f.title}</h3>
-                <p>{f.desc}</p>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:40,alignItems:"center"}}>
+            <div>
+              <div className="pr-eyebrow">Why Prosper</div>
+              <h2 className="pr-title">Here to help you thrive</h2>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginTop:28}}>
+                {[
+                  { icon:"💻", title:"100% online applications", desc:"Check your rate in minutes. No branch visit needed." },
+                  { icon:"🔍", title:"Ease & transparency", desc:"Clear terms, no hidden fees, no surprises." },
+                  { icon:"🤝", title:"Human customer service", desc:"Real people ready to answer your questions." },
+                  { icon:"📅", title:"20 years of experience", desc:"Helping people thrive since 2005 with $25B+ funded." },
+                ].map(f => (
+                  <div key={f.title} className="pr-feat" style={{textAlign:"left",padding:"20px 18px"}}>
+                    <div className="pr-feat-icon" style={{marginBottom:10}}>{f.icon}</div>
+                    <h3 style={{marginBottom:6}}>{f.title}</h3>
+                    <p>{f.desc}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div style={{borderRadius:20,overflow:"hidden",height:420}}>
+              <img src="/prosper-beach.png" alt="Woman thriving with Prosper"
+                style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center"}}
+                onError={e => { (e.target as HTMLImageElement).style.background="linear-gradient(135deg,#f0e4d7,#c8a87a)"; }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -555,28 +657,66 @@ export default function ProsperApply() {
         </div>
       </section>
 
-      {/* App Section */}
+      {/* App Section — with phone mockup */}
       <section className="pr-app-section">
-        <div className="pr-app-inner">
+        <div style={{maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:60,alignItems:"center",padding:"0 24px"}}>
           <div>
             <h2 className="pr-app-h2">Do it all in the Prosper app</h2>
-            <p className="pr-app-p">Free credit tracking & insights, loan management, investing portfolio — all in one place. Download the app and scan to apply on your mobile device.</p>
-            <div className="pr-store-btns">
+            <p className="pr-app-p">Free credit tracking & score insights, loan management, investing portfolio — all in one place.</p>
+            <div className="pr-store-btns" style={{marginTop:28}}>
               <div className="pr-store-btn">
-                <span style={{fontSize:24}}>🍎</span>
-                <span>App Store</span>
+                <span style={{fontSize:22}}>🍎</span>
+                <div><div style={{fontSize:10,opacity:0.7}}>Download on the</div><div style={{fontSize:14,fontWeight:700}}>App Store</div></div>
               </div>
               <div className="pr-store-btn">
-                <span style={{fontSize:24}}>▶</span>
-                <span>Google Play</span>
+                <span style={{fontSize:22}}>▶</span>
+                <div><div style={{fontSize:10,opacity:0.7}}>Get it on</div><div style={{fontSize:14,fontWeight:700}}>Google Play</div></div>
               </div>
             </div>
           </div>
-          <div className="pr-qr-box">
-            <div className="pr-qr-img">
-              <div style={{width:90,height:90,background:"repeating-linear-gradient(0deg,#6B3FA0 0px,#6B3FA0 5px,transparent 5px,transparent 10px),repeating-linear-gradient(90deg,#6B3FA0 0px,#6B3FA0 5px,transparent 5px,transparent 10px)",borderRadius:6}}/>
+          {/* Phone mockup showing credit score */}
+          <div style={{display:"flex",justifyContent:"center",alignItems:"center",position:"relative"}}>
+            {/* Notification bubbles */}
+            <div style={{position:"absolute",left:"-10px",top:"15%",background:"rgba(255,255,255,0.12)",backdropFilter:"blur(8px)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:12,padding:"10px 14px",fontSize:12,color:"#fff",fontWeight:600,maxWidth:160,display:"flex",alignItems:"center",gap:8,zIndex:2}}>
+              <div style={{width:28,height:28,borderRadius:"50%",background:"#F26B21",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:13}}>⚡</div>
+              Your credit line just got a bump!
             </div>
-            <p style={{color:"rgba(255,255,255,0.75)",fontSize:13}}>Scan to apply on your mobile device</p>
+            <div style={{position:"absolute",right:"-10px",top:"20%",background:"rgba(255,255,255,0.12)",backdropFilter:"blur(8px)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:12,padding:"10px 14px",fontSize:12,color:"#fff",fontWeight:600,maxWidth:170,display:"flex",alignItems:"center",gap:8,zIndex:2}}>
+              <div style={{width:28,height:28,borderRadius:"50%",background:"#F26B21",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:13}}>📈</div>
+              +15pt credit score increase last month!
+            </div>
+            {/* Phone frame */}
+            <div style={{width:220,background:"#1e2635",borderRadius:40,padding:"12px 8px",boxShadow:"0 30px 80px rgba(0,0,0,0.4)",position:"relative",zIndex:1}}>
+              {/* Notch */}
+              <div style={{width:70,height:20,background:"#1e2635",borderRadius:10,margin:"0 auto 10px",position:"relative",zIndex:2}}/>
+              {/* Screen */}
+              <div style={{background:"#fff8f4",borderRadius:28,padding:"20px 16px",minHeight:360}}>
+                {/* App header */}
+                <div style={{textAlign:"center",marginBottom:16}}>
+                  <div style={{width:48,height:48,borderRadius:"50%",background:"linear-gradient(135deg,#F26B21,#D81265)",margin:"0 auto 10px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>😊</div>
+                  <div style={{fontSize:14,fontWeight:800,color:"#2D3545"}}>Keep up the good work!</div>
+                  <div style={{fontSize:11,color:"#9ca3af",marginTop:2}}>See your credit score progress</div>
+                </div>
+                {/* Score gauge */}
+                <div style={{background:"#fff",borderRadius:16,padding:"20px 16px",marginBottom:8}}>
+                  <svg viewBox="0 0 160 90" style={{width:"100%",height:"auto"}}>
+                    {/* Background arc */}
+                    <path d="M20 80 A60 60 0 0 1 140 80" fill="none" stroke="#f0e4d7" strokeWidth="12" strokeLinecap="round"/>
+                    {/* Score arc (755 out of 850, ~75%) */}
+                    <path d="M20 80 A60 60 0 0 1 130 32" fill="none" stroke="#F26B21" strokeWidth="12" strokeLinecap="round"/>
+                    {/* Teal diamond marker */}
+                    <polygon points="133,28 138,33 133,38 128,33" fill="#00897B"/>
+                    {/* Score text */}
+                    <text x="80" y="68" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="22" fontWeight="800" fill="#2D3545">755</text>
+                    <text x="80" y="82" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="9" fill="#9ca3af">Nice work!</text>
+                    <text x="20" y="92" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="8" fill="#9ca3af">300</text>
+                    <text x="140" y="92" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="8" fill="#9ca3af">850</text>
+                  </svg>
+                </div>
+                {/* Credit tracking label */}
+                <div style={{textAlign:"center",fontSize:11,fontWeight:600,color:"#F26B21",marginTop:4}}>Free credit tracking & insights</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -591,7 +731,7 @@ export default function ProsperApply() {
 
         <div className="pr-form-wrap">
           <div className="pr-form-header">
-            <ProsperLogo />
+            <ProsperLogo height={40} />
             <h2 style={{marginTop:16}}>Prosper Application</h2>
             <p>{client ? `Verified access for ${client.name}` : "Complete the form below to check your personalized rate"}</p>
           </div>
@@ -675,7 +815,7 @@ export default function ProsperApply() {
       <footer className="pr-footer">
         <div className="pr-ft-main">
           <div className="pr-ft-brand">
-            <ProsperLogo />
+            <ProsperLogo height={32} />
             <p>Helping people thrive since 2005. © 2005–2026 Prosper Funding LLC. All rights reserved.<br/>221 Main Street, Suite 300, San Francisco, CA 94105</p>
           </div>
           {[
