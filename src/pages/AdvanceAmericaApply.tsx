@@ -682,8 +682,6 @@ export default function AdvanceAmericaApply() {
           <div>
             <h4 style={{fontSize:18, marginBottom:20, color:"var(--gold)", fontFamily:"'Outfit',sans-serif"}}>Advance America Lending</h4>
             <div className="aa-ft-contact">
-              <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", marginBottom:10}}>Toll-Free: <a href="#">(800) 555-0199</a></p>
-              <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", marginBottom:10}}>Email: <a href="mailto:support@advanceamerica.test">support@advanceamerica.test</a></p>
               <p style={{fontSize:15, color:"rgba(255,255,255,0.7)", maxWidth:280, marginTop:24}}>
                 2602 E Fletcher Ave Unit 10<br/>Tampa, FL 33612
               </p>
