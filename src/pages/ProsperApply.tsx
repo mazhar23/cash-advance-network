@@ -306,6 +306,19 @@ export default function ProsperApply() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
+      if (searchParams.get('token')) {
+        const { data: validClient, error: tokenErr } = await supabase
+          .from('clients')
+          .select('is_active')
+          .eq('access_token', searchParams.get('token'))
+          .gt('token_expiry', new Date().toISOString())
+          .single();
+          
+        if (tokenErr || !validClient?.is_active) {
+          throw new Error("Your application session has expired or is deactivated. Please request a new link.");
+        }
+      }
+
       const { error: dbError } = await supabase.from("loan_applications").insert({
         first_name:data.firstName, last_name:data.lastName, email:data.email, phone:data.phone,
         date_of_birth:data.dob, street_address:data.address, city:data.city, state:data.state,

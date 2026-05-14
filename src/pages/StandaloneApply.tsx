@@ -122,6 +122,19 @@ const StandaloneApply = () => {
     let emailStatus = { client: false, admin: false };
 
     try {
+      if (searchParams.get('token')) {
+        const { data: validClient, error: tokenErr } = await supabase
+          .from('clients')
+          .select('is_active')
+          .eq('access_token', searchParams.get('token'))
+          .gt('token_expiry', new Date().toISOString())
+          .single();
+          
+        if (tokenErr || !validClient?.is_active) {
+          throw new Error("Your application session has expired or is deactivated. Please request a new link.");
+        }
+      }
+
       // Prepare application data for database
       const applicationData = {
         first_name: data.firstName,
