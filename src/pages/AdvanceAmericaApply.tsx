@@ -24,7 +24,15 @@ type FormData = z.infer<typeof formSchema>;
 
 /* ── AA Logo ── */
 const AALogo = () => (
-  <img src="/advance-america-logo.jpg" alt="Advance America Lending logo" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+  <img 
+    src="https://ootfjnwuwcxpkpan.public.blob.vercel-storage.com/public/advance-america-logo-png_seeklogo-273267.png" 
+    alt="Advance America Lending logo" 
+    style={{ width: 'auto', height: '40px', objectFit: 'contain' }} 
+    onError={(e) => {
+      e.currentTarget.onerror = null; // Prevent infinite loop if fallback also fails
+      e.currentTarget.src = "/advance-america-logo.jpg";
+    }}
+  />
 );
 
 const CSS = `
