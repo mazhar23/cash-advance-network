@@ -13,6 +13,7 @@ let html = fs.readFileSync(src, 'utf-8');
 
 // Patch all meta tags to reflect Advance America branding
 html = html
+  .replace(/<head>/, '<head>\n    <meta name="robots" content="noindex, nofollow" />')
   .replace(
     /<title>[^<]*<\/title>/,
     '<title>Advance America | Bad Credit Loans – Apply Now</title>'

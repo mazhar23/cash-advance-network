@@ -11,6 +11,7 @@ if (!fs.existsSync(src)) {
 let html = fs.readFileSync(src, 'utf-8');
 
 html = html
+  .replace(/<head>/, '<head>\n    <meta name="robots" content="noindex, nofollow" />')
   .replace(/<title>[^<]*<\/title>/, '<title>Prosper Personal Loans | Helping People Thrive Since 2005</title>')
   .replace(/(<meta property="og:title" content=")[^"]*(")/,'$1Prosper | Personal Loans up to $50K — Apply Now$2')
   .replace(/(<meta property="og:description" content=")[^"]*(")/,'$1Get a personal loan up to $50K with no impact to your credit score. Next-day funding. No prepay penalties. Helping people thrive since 2005.$2')
