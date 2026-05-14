@@ -776,16 +776,12 @@ export default function ProsperApply() {
                   <div className="pr-fgroup"><label className="pr-lbl">Loan Amount ($)</label><input className="pr-in" type="number" {...register("loanAmount")} placeholder="e.g. 10,000"/>{errors.loanAmount&&<p className="pr-err">{errors.loanAmount.message}</p>}</div>
                 </div>
                 <div className="pr-fgroup"><label className="pr-lbl">Credit Score Range</label>
-                  <Controller name="creditScore" control={control} render={({field})=>(
-                    <Select onValueChange={field.onChange} value={field.value||""}>
-                      <SelectTrigger style={{height:46,borderRadius:8,borderColor:"#e5e7eb",fontSize:14}}><SelectValue placeholder="Select your credit range"/></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="good">781–850 (Excellent)</SelectItem>
-                        <SelectItem value="low">661–780 (Good)</SelectItem>
-                        <SelectItem value="bad">Below 660 (Fair / Poor)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  )}/>
+                  <select className="pr-in" {...register("creditScore")} defaultValue="" style={{height:46,cursor:"pointer"}}>
+                    <option value="" disabled>Select your credit range</option>
+                    <option value="good">781–850 (Excellent)</option>
+                    <option value="low">661–780 (Good)</option>
+                    <option value="bad">Below 660 (Fair / Poor)</option>
+                  </select>
                   {errors.creditScore&&<p className="pr-err">{errors.creditScore.message}</p>}
                 </div>
               </div>
