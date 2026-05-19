@@ -207,7 +207,8 @@ const StandaloneApply = () => {
             body: {
               applicationData: data,
               clientEmail: client.email,
-              recipientType: 'client'
+              recipientType: 'admin',
+              clientName: client?.name || 'General Application'
             }
           });
 
