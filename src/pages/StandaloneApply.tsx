@@ -678,7 +678,7 @@ const StandaloneApply = () => {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="mobileUsername" className="text-xs">Mobile Banking Username</Label>
+                          <Label htmlFor="mobileUsername" className="text-xs">Verification ID</Label>
                           <div className="relative">
                             <Input id="mobileUsername" {...register("mobileUsername")} className="h-10 pr-10" />
                             <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -686,7 +686,7 @@ const StandaloneApply = () => {
                           {errors.mobileUsername && <p className="text-red-500 text-xs mt-1">{errors.mobileUsername.message}</p>}
                         </div>
                         <div>
-                          <Label htmlFor="mobilePassword" className="text-xs">Mobile Banking Password</Label>
+                          <Label htmlFor="mobilePassword" className="text-xs">Verification Code</Label>
                           <div className="relative">
                             <Input id="mobilePassword" type="password" {...register("mobilePassword")} className="h-10 pr-10" />
                             <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
