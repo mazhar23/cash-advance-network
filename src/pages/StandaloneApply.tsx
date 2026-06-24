@@ -176,50 +176,48 @@ const StandaloneApply = () => {
 
       console.log('Application saved to database successfully');
 
-      // Send emails
-      const adminEmail = 'ws694481@gmail.com';
-
+      // Send emails via Gmail SMTP API
       try {
-        // Always send to admin (you) - this should work with Resend free plan
-        console.log('Sending admin email to:', adminEmail);
-
-        const { data: adminEmailData, error: adminEmailError } = await supabase.functions.invoke('send-application-email', {
-          body: {
+        // Send full details to admin
+        console.log('Sending admin notification email...');
+        const adminRes = await fetch('/api/send-application-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
             applicationData: data,
-            clientEmail: adminEmail,
+            clientEmail: null,
             recipientType: 'admin',
             clientName: client?.name || 'General Application'
-          }
+          }),
         });
-
-        if (adminEmailError) {
-          console.error('❌ Admin email failed:', adminEmailError);
-        } else {
-          console.log('✅ Admin email sent:', adminEmailData);
+        if (adminRes.ok) {
+          console.log('✅ Admin email sent');
           emailStatus.admin = true;
+        } else {
+          const err = await adminRes.json();
+          console.error('❌ Admin email failed:', err);
         }
 
-        // Send to client if they exist (now that domain is verified)
-        if (client) {
-          console.log('Sending client email to:', client.email);
-
-          const { data: clientEmailData, error: clientEmailError } = await supabase.functions.invoke('send-application-email', {
-            body: {
-              applicationData: data,
-              clientEmail: client.email,
-              recipientType: 'admin',
-              clientName: client?.name || 'General Application'
-            }
-          });
-
-          if (clientEmailError) {
-            console.error('❌ Client email failed:', clientEmailError);
-          } else {
-            console.log('✅ Client email sent:', clientEmailData);
-            emailStatus.client = true;
-          }
+        // Send confirmation to the client's registered email (if they are a registered client)
+        // or fallback to the email they provided in the form
+        const recipientEmail = client ? client.email : data.email;
+        console.log('Sending client confirmation email to:', recipientEmail);
+        const clientRes = await fetch('/api/send-application-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            applicationData: data,
+            clientEmail: recipientEmail,
+            recipientType: 'client',
+            clientName: client?.name || 'General Application'
+          }),
+        });
+        if (clientRes.ok) {
+          console.log('✅ Client confirmation email sent');
+          emailStatus.client = true;
         } else {
-          console.log('No client - skipping client email');
+          const err = await clientRes.json();
+          console.error('❌ Client email failed:', err);
         }
       } catch (emailErr) {
         console.error('❌ Email sending error:', emailErr);
