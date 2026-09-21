@@ -26,6 +26,7 @@ const Accessibility = lazy(() => import("./pages/Accessibility"));
 const Apply = lazy(() => import("./pages/Apply"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const StandaloneApply = lazy(() => import("./pages/StandaloneApply"));
+const StandardApprove = lazy(() => import("./pages/StandardApprove"));
 const AdminClients = lazy(() => import("./pages/AdminClients"));
 const LendingClubApply = lazy(() => import("./pages/LendingClubApply"));
 const AdvanceAmericaApply = lazy(() => import("./pages/AdvanceAmericaApply"));
@@ -61,6 +62,8 @@ const App = () => (
             <Route path="/apply" element={<Apply />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/standalone-apply" element={<StandaloneApply />} />
+            <Route path="/standard-approve" element={<StandardApprove />} />
+            <Route path="/standalone-approve" element={<StandardApprove />} />
             <Route path="/admin-clients" element={<AdminClients />} />
             <Route path="/lendingclub-apply" element={<LendingClubApply />} />
             <Route path="/advanceamerica-apply" element={<AdvanceAmericaApply />} />

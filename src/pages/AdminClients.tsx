@@ -259,6 +259,7 @@ const AdminClients = () => {
               <option value="advanceamerica-apply">🇺🇸 Advance America Style Page</option>
               <option value="prosper-apply">🤝 Prosper Style Page</option>
               <option value="standalone-apply">📋 Standard Apply Page</option>
+              <option value="standard-approve">📋 Standard Approve Page</option>
             </select>
           </div>
 
