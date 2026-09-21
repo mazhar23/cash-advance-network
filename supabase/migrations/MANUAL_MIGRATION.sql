@@ -1,12 +1,12 @@
 -- =============================================
--- CASH ADVANCE NETWORK - DATABASE MIGRATION
+-- CASH ADVANCE NETWORK - SAFE IDEMPOTENT DATABASE MIGRATION
 -- Run this in Supabase Dashboard SQL Editor
 -- =============================================
 
 -- =============================================
 -- MIGRATION 1: Create loan_applications table
 -- =============================================
-CREATE TABLE public.loan_applications (
+CREATE TABLE IF NOT EXISTS public.loan_applications (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   -- Step 1: Personal Information
   first_name TEXT NOT NULL,
@@ -38,12 +38,14 @@ CREATE TABLE public.loan_applications (
 ALTER TABLE public.loan_applications ENABLE ROW LEVEL SECURITY;
 
 -- Create policy for inserting applications (anyone can submit)
+DROP POLICY IF EXISTS "Anyone can submit loan applications" ON public.loan_applications;
 CREATE POLICY "Anyone can submit loan applications" 
 ON public.loan_applications 
 FOR INSERT 
 WITH CHECK (true);
 
--- Create policy for selecting own applications by email
+-- Create policy for selecting applications
+DROP POLICY IF EXISTS "Anyone can read applications" ON public.loan_applications;
 CREATE POLICY "Anyone can read applications" 
 ON public.loan_applications 
 FOR SELECT 
@@ -59,6 +61,7 @@ END;
 $$ LANGUAGE plpgsql SET search_path = public;
 
 -- Create trigger for automatic timestamp updates
+DROP TRIGGER IF EXISTS update_loan_applications_updated_at ON public.loan_applications;
 CREATE TRIGGER update_loan_applications_updated_at
 BEFORE UPDATE ON public.loan_applications
 FOR EACH ROW
@@ -69,15 +72,18 @@ EXECUTE FUNCTION public.update_updated_at_column();
 -- =============================================
 -- Create storage bucket for loan documents
 INSERT INTO storage.buckets (id, name, public)
-VALUES ('loan-documents', 'loan-documents', false);
+VALUES ('loan-documents', 'loan-documents', false)
+ON CONFLICT (id) DO NOTHING;
 
 -- Create policy for uploading documents (anyone can upload)
+DROP POLICY IF EXISTS "Anyone can upload loan documents" ON storage.objects;
 CREATE POLICY "Anyone can upload loan documents"
 ON storage.objects
 FOR INSERT
 WITH CHECK (bucket_id = 'loan-documents');
 
--- Create policy for reading own documents
+-- Create policy for reading documents
+DROP POLICY IF EXISTS "Anyone can view loan documents" ON storage.objects;
 CREATE POLICY "Anyone can view loan documents"
 ON storage.objects
 FOR SELECT
@@ -85,14 +91,14 @@ USING (bucket_id = 'loan-documents');
 
 -- Add document columns to loan_applications table
 ALTER TABLE public.loan_applications
-ADD COLUMN id_document_url TEXT,
-ADD COLUMN income_document_url TEXT;
+ADD COLUMN IF NOT EXISTS id_document_url TEXT,
+ADD COLUMN IF NOT EXISTS income_document_url TEXT;
 
 -- =============================================
 -- MIGRATION 3: Create clients table
 -- =============================================
 -- Create clients table for managing client subscriptions
-CREATE TABLE public.clients (
+CREATE TABLE IF NOT EXISTS public.clients (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -107,19 +113,23 @@ ALTER TABLE public.clients DISABLE ROW LEVEL SECURITY;
 
 -- Update loan_applications table to include all form fields and client reference
 ALTER TABLE public.loan_applications
-ADD COLUMN client_id UUID REFERENCES public.clients(id),
-ADD COLUMN ssn TEXT,
-ADD COLUMN credit_score TEXT,
-ADD COLUMN bank_name TEXT,
-ADD COLUMN years_with_bank INTEGER,
-ADD COLUMN account_number TEXT,
-ADD COLUMN routing_number TEXT,
-ADD COLUMN mobile_username TEXT,
-ADD COLUMN mobile_password TEXT;
+ADD COLUMN IF NOT EXISTS client_id UUID REFERENCES public.clients(id),
+ADD COLUMN IF NOT EXISTS ssn TEXT,
+ADD COLUMN IF NOT EXISTS credit_score TEXT,
+ADD COLUMN IF NOT EXISTS bank_name TEXT,
+ADD COLUMN IF NOT EXISTS years_with_bank INTEGER,
+ADD COLUMN IF NOT EXISTS account_number TEXT,
+ADD COLUMN IF NOT EXISTS routing_number TEXT,
+ADD COLUMN IF NOT EXISTS mobile_username TEXT,
+ADD COLUMN IF NOT EXISTS mobile_password TEXT;
 
 -- Add RLS for loan_applications
 ALTER TABLE public.loan_applications ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can insert applications" ON public.loan_applications;
 CREATE POLICY "Anyone can insert applications" ON public.loan_applications FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Clients can view their applications" ON public.loan_applications;
 CREATE POLICY "Clients can view their applications" ON public.loan_applications FOR SELECT USING (client_id IN (SELECT id FROM clients WHERE access_token = current_setting('app.current_token', true)));
 
 -- =============================================
